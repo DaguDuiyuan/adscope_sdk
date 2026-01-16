@@ -151,6 +151,7 @@ enum AMPSAdSdkMethodNames {
     static let splashLoad = "AMPSSplashAd_load"
     static let splashShowAd = "AMPSSplashAd_showAd"
     static let splashGetEcpm = "AMPSSplashAd_getECPM"
+    static let splashDestroy = "AMPSSplashAd_destroy"
 //    static let splashNotifyRtbWin = "AMPSSplashAd_notifyRTBWin"
 //    static let splashNotifyRtbLoss = "AMPSSplashAd_notifyRTBLoss"
     static let splashIsReadyAd = "AMPSSplashAd_isReadyAd"
@@ -160,6 +161,7 @@ enum AMPSAdSdkMethodNames {
     static let interstitialLoad = "AMPSInterstitial_load"
     static let interstitialShowAd = "AMPSInterstitial_showAd"
     static let interstitialGetEcpm = "AMPSInterstitial_getECPM"
+    static let interstitialDestroy = "AMPSInterstitial_destroy"
 //    static let interstitialNotifyRtbWin = "AMPSInterstitial_notifyRTBWin"
 //    static let interstitialNotifyRtbLoss = "AMPSInterstitial_notifyRTBLoss"
     static let interstitialIsReadyAd = "AMPSInterstitial_isReadyAd"
@@ -260,7 +262,8 @@ let splashMethodNames: Set<String> = [
     AMPSAdSdkMethodNames.splashLoad,
     AMPSAdSdkMethodNames.splashShowAd,
     AMPSAdSdkMethodNames.splashGetEcpm,
-    AMPSAdSdkMethodNames.splashIsReadyAd
+    AMPSAdSdkMethodNames.splashIsReadyAd,
+    AMPSAdSdkMethodNames.splashDestroy
 ]
 
 let interstitialMethodNames: Set<String> = [
@@ -268,7 +271,8 @@ let interstitialMethodNames: Set<String> = [
     AMPSAdSdkMethodNames.interstitialLoad,
     AMPSAdSdkMethodNames.interstitialShowAd,
     AMPSAdSdkMethodNames.interstitialGetEcpm,
-    AMPSAdSdkMethodNames.interstitialIsReadyAd
+    AMPSAdSdkMethodNames.interstitialIsReadyAd,
+    AMPSAdSdkMethodNames.interstitialDestroy
 ]
 
 let nativeMethodNames: Set<String> = [

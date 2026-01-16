@@ -29,6 +29,9 @@ class AMPSInterstitialManager: NSObject {
             handleInterstitialShowAd(arguments: arguments, result: result)
         case AMPSAdSdkMethodNames.interstitialGetEcpm:
             result(interstitialAd?.eCPM() ?? 0)
+        case AMPSAdSdkMethodNames.interstitialDestroy:
+            cleanupViewsAfterAdClosed()
+            result(nil)
         case AMPSAdSdkMethodNames.interstitialIsReadyAd:
             result(interstitialAd != nil)
         default:

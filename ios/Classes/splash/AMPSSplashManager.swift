@@ -38,7 +38,9 @@ class AMPSSplashManager: NSObject {
             handleSplashShowAd(arguments: arguments, result: result)
         case AMPSAdSdkMethodNames.splashGetEcpm:
             result(splashAd?.eCPM() ?? 0)
-        
+        case AMPSAdSdkMethodNames.splashDestroy:
+            cleanupViewsAfterAdClosed()
+            result(nil)
         case AMPSAdSdkMethodNames.splashIsReadyAd:
             result(splashAd != nil)
         default:
