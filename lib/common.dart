@@ -143,6 +143,8 @@ class AMPSAdSdkMethodNames {
   static const String splashPreLoad = "AMPSSplashAd_preLoad";
   static const String splashAddPreLoadAdInfo = "AMPSSplashAd_addPreLoadAdInfo";
   static const String splashAddPreGetMediaExtraInfo = "AMPSSplashAd_getMediaExtraInfo";
+  static const String splashDestroy = "AMPSSplashAd_destroy";
+
   /// 插屏相关方法
   static const String interstitialCreate = "AMPSInterstitial_create";
   static const String interstitialLoad = "AMPSInterstitial_load";
@@ -152,6 +154,7 @@ class AMPSAdSdkMethodNames {
   static const String interstitialIsReadyAd = "AMPSInterstitial_isReadyAd";
   static const String interstitialAddPreLoadAdInfo = "AMPSInterstitial_addPreLoadAdInfo";
   static const String interstitialGetMediaExtraInfo = "AMPSInterstitial_getMediaExtraInfo";
+  static const String interstitialDestroy = "AMPSInterstitial_destroy";
 
   /// 原生与自渲染相关方法
   static const String nativeCreate = 'AMPSNative_create';

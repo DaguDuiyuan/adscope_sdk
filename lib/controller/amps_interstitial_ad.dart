@@ -113,4 +113,9 @@ class AMPSInterstitialAd {
     return await AdscopeSdk.channel
         .invokeMapMethod(AMPSAdSdkMethodNames.interstitialGetMediaExtraInfo);
   }
+
+  Future destroy() {
+    return AdscopeSdk.channel
+        .invokeMethod(AMPSAdSdkMethodNames.interstitialDestroy);
+  }
 }
