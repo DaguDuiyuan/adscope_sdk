@@ -119,7 +119,10 @@ class AMPSSplashManager private constructor() {
             AMPSAdSdkMethodNames.SPLASH_IS_READY_AD -> {
                 result.success(mSplashAd?.isReady ?: false)
             }
-
+            AMPSAdSdkMethodNames.SPLASH_DESTROY -> {
+                mSplashAd?.destroy()
+                result.success(null)
+            }
             else -> result.notImplemented()
         }
     }

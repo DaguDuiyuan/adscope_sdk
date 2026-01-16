@@ -104,6 +104,10 @@ class AMPSInterstitialManager private constructor() {
                 }
                 result.success(mediaExtraInfo)
             }
+            AMPSAdSdkMethodNames.INTERSTITIAL_DESTROY ->{
+                interstitialAd?.destroy()
+                result.success(null)
+            }
 
             else -> result.notImplemented()
         }

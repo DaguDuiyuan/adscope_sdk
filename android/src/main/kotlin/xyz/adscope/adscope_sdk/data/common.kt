@@ -158,6 +158,7 @@ object AMPSAdSdkMethodNames {
     const val SPLASH_ADD_PRE_LOAD_AD_INFO = "AMPSSplashAd_addPreLoadAdInfo"
     const val SPLASH_GET_MEDIA_EXTRA_INFO = "AMPSSplashAd_getMediaExtraInfo"
     const val SPLASH_IS_READY_AD = "AMPSSplashAd_isReadyAd"
+    const val SPLASH_DESTROY = "AMPSSplashAd_destroy"
 
     // Interstitial ad related methods
     const val INTERSTITIAL_CREATE = "AMPSInterstitial_create"
@@ -166,6 +167,7 @@ object AMPSAdSdkMethodNames {
     const val INTERSTITIAL_SHOW_AD = "AMPSInterstitial_showAd"
     const val INTERSTITIAL_GET_ECPM = "AMPSInterstitial_getECPM"
     const val INTERSTITIAL_IS_READY_AD = "AMPSInterstitial_isReadyAd"
+    const val INTERSTITIAL_DESTROY = "AMPSInterstitial_destroy"
     const val INTERSTITIAL_ADD_PRE_LOAD_AD_INFO = "AMPSInterstitial_addPreLoadAdInfo"
     const val INTERSTITIAL_GET_MEDIA_EXTRA_INFO = "AMPSInterstitial_getMediaExtraInfo"
 
@@ -257,7 +259,8 @@ val SplashMethodNames: Set<String> = setOf(
     AMPSAdSdkMethodNames.SPLASH_PRE_LOAD,
     AMPSAdSdkMethodNames.SPLASH_ADD_PRE_LOAD_AD_INFO,
     AMPSAdSdkMethodNames.SPLASH_GET_MEDIA_EXTRA_INFO,
-    AMPSAdSdkMethodNames.SPLASH_IS_READY_AD
+    AMPSAdSdkMethodNames.SPLASH_IS_READY_AD,
+    AMPSAdSdkMethodNames.SPLASH_DESTROY
 )
 
 val InterstitialMethodNames: Set<String> = setOf(
@@ -267,6 +270,7 @@ val InterstitialMethodNames: Set<String> = setOf(
     AMPSAdSdkMethodNames.INTERSTITIAL_SHOW_AD,
     AMPSAdSdkMethodNames.INTERSTITIAL_GET_ECPM,
     AMPSAdSdkMethodNames.INTERSTITIAL_IS_READY_AD,
+    AMPSAdSdkMethodNames.INTERSTITIAL_DESTROY,
     AMPSAdSdkMethodNames.INTERSTITIAL_ADD_PRE_LOAD_AD_INFO,
     AMPSAdSdkMethodNames.INTERSTITIAL_GET_MEDIA_EXTRA_INFO
 )

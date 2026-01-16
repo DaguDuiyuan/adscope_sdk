@@ -124,4 +124,9 @@ class AMPSSplashAd {
   void registerChannel(VoidCallback callBack) {
     mCloseCallBack = callBack;
   }
+
+  Future destroy() {
+    return AdscopeSdk.channel
+        .invokeMethod(AMPSAdSdkMethodNames.splashDestroy);
+  }
 }

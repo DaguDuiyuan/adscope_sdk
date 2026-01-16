@@ -20,7 +20,11 @@ class _SplashWidgetPageState extends State<SplashWidgetPage> {
   bool couldBack = true;
   bool isLoading = false;
   num eCpm = -1;
-
+  @override
+  void dispose() {
+    super.dispose();
+    _splashAd?.destroy();
+  }
   @override
   void initState() {
     //SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
