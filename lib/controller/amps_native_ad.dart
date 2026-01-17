@@ -11,6 +11,7 @@ import '../data/unified_pattern.dart';
 ///原生广告类
 class AMPSNativeAd {
   NativeType nativeType = NativeType.native;
+  static const String _nativeAdHandlerKey = "native_ad_handler";
 
   ///默认原生模式【鸿蒙中原生和自渲染是一样的调用入口；Android是两个不同的入口，所以这里需要说明文档说明】
   AdOptions config;
@@ -30,8 +31,8 @@ class AMPSNativeAd {
       this.nativeType = NativeType.native,
       this.mCallBack,
       this.mRenderCallBack}) {
-
-    AdscopeSdk.channel.setMethodCallHandler(
+    AdscopeSdk.removeMethodCallHandler(_nativeAdHandlerKey+nativeType.name);
+    AdscopeSdk.addMethodCallHandler(_nativeAdHandlerKey+nativeType.name,
       (call) async {
         switch (call.method) {
           case AMPSNativeCallBackChannelMethod.loadOk:
@@ -177,14 +178,14 @@ class AMPSNativeAd {
         }
       },
     );
-    AdscopeSdk.channel.invokeMethod(
+    AdscopeSdk.invokeMethod(
       AMPSAdSdkMethodNames.nativeCreate,
       config.toMap(nativeType: nativeType),
     );
   }
 
   void load() async {
-    AdscopeSdk.channel.invokeMethod(
+    AdscopeSdk.invokeMethod(
       AMPSAdSdkMethodNames.nativeLoad,
       nativeType.value,
     );
@@ -193,7 +194,7 @@ class AMPSNativeAd {
   //自渲染类型
   Future<AMPSUnifiedPattern> getUnifiedPattern(String adId) async {
     final Map<String, dynamic> args = {adNativeType: nativeType.value, adAdId: adId};
-    final pattern = await AdscopeSdk.channel
+    final pattern = await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.nativePattern, args);
     return  AMPSUnifiedPattern.fromValue(pattern);
   }
@@ -201,7 +202,7 @@ class AMPSNativeAd {
   Future<UnifiedAdDownloadAppInfo?> getDownLoadInfo(String adId) async {
     try {
       final Map<String, dynamic> args = {adNativeType: nativeType.value, adAdId: adId};
-      final dynamic appInfo = await AdscopeSdk.channel
+      final dynamic appInfo = await AdscopeSdk
           .invokeMethod(AMPSAdSdkMethodNames.nativeUnifiedGetDownLoad, args);
       Map<String, dynamic>? dataMap;
       if (appInfo != null) {
@@ -216,7 +217,7 @@ class AMPSNativeAd {
   ///获取信息
   Future<dynamic> getMediaExtraInfo() async {
     try {
-      final mediaExtraInfo = await AdscopeSdk.channel.invokeMethod(
+      final mediaExtraInfo = await AdscopeSdk.invokeMethod(
           AMPSAdSdkMethodNames.nativeGetMediaExtraInfo, nativeType.value);
       return mediaExtraInfo;
     } on PlatformException catch (e) {
@@ -226,39 +227,39 @@ class AMPSNativeAd {
 
   ///销毁
   Future<void> destroy() async {
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.nativeDestroy, nativeType.value);
   }
 
   ///失去焦点
   Future<void> resume() async {
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.nativeResume, nativeType.value);
   }
 
   ///失去焦点
   Future<void> pause() async {
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.nativePause, nativeType.value);
   }
   ///获取是否有预加载
   Future<bool> isReadyAd(String adId) async {
     final Map<String, dynamic> args = {adNativeType: nativeType.value, adAdId: adId};
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.nativeIsReadyAd, args);
   }
 
   ///获取ecpm
   Future<num> getECPM(String adId) async {
     final Map<String, dynamic> args = {adNativeType: nativeType.value, adAdId: adId};
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.nativeGetECPM, args);
   }
 
   ///获取是否是自渲染
   Future<bool> isNativeExpress(String adId) async {
     final Map<String, dynamic> args = {adNativeType: nativeType.value, adAdId: adId};
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.nativeIsNativeExpress, args);
   }
 

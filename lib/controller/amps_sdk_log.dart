@@ -8,7 +8,7 @@ class SDKLog {
   ///Android日志调试
   static setLogLevel(LogLevel level) {
     if (Platform.isAndroid) {
-      AdscopeSdk.channel.invokeMethod(
+      AdscopeSdk.invokeMethod(
         AMPSAdSdkMethodNames.setLogLevel,
         level.value,
       );

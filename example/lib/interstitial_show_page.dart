@@ -1,6 +1,5 @@
 import 'package:adscope_sdk/amps_sdk_export.dart';
 import 'package:adscope_sdk_example/data/common.dart';
-import 'package:adscope_sdk_example/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
 class InterstitialShowPage extends StatefulWidget {
   const InterstitialShowPage({super.key, required this.title});
@@ -14,7 +13,6 @@ class InterstitialShowPage extends StatefulWidget {
 class _InterstitialShowPageState extends State<InterstitialShowPage> {
   late AdCallBack _adCallBack;
   AMPSInterstitialAd? _interAd;
-  bool couldBack = true;
   num eCpm = 0;
   @override
   void initState() {
@@ -28,21 +26,12 @@ class _InterstitialShowPageState extends State<InterstitialShowPage> {
           debugPrint("ad load failure=$code;$msg");
         },
         onAdClicked: () {
-          setState(() {
-            couldBack = true;
-          });
           debugPrint("ad load onAdClicked");
         },
         onAdClosed: () {
-          setState(() {
-            couldBack = true;
-          });
           debugPrint("ad load onAdClosed");
         },
         onAdShow: () {
-          setState(() {
-            couldBack = false;
-          });
           debugPrint("ad load onAdShow");
         });
 
@@ -56,9 +45,7 @@ class _InterstitialShowPageState extends State<InterstitialShowPage> {
   }
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-        canPop: couldBack,
-        child:   Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -77,6 +64,6 @@ class _InterstitialShowPageState extends State<InterstitialShowPage> {
           ]
         ),
       ],)
-    ));
+    );
   }
 }

@@ -7,11 +7,12 @@ import '../widget/splash_bottom_widget.dart';
 
 ///开屏广告类
 class AMPSSplashAd {
+  static const String _splashAdHandlerKey = "splash_ad_handler";
   AdOptions config;
   AdCallBack? mCallBack;
   VoidCallback? mCloseCallBack;
   AMPSSplashAd({required this.config, this.mCallBack}) {
-    AdscopeSdk.channel.invokeMethod(
+    AdscopeSdk.invokeMethod(
       AMPSAdSdkMethodNames.splashCreate,
       config.toMap(),
     );
@@ -19,60 +20,61 @@ class AMPSSplashAd {
   }
 
   void setMethodCallHandler() {
-    AdscopeSdk.channel.setMethodCallHandler(
+    AdscopeSdk.removeMethodCallHandler(_splashAdHandlerKey);
+    AdscopeSdk.addMethodCallHandler(_splashAdHandlerKey,
       (call) async {
         switch (call.method) {
-          case AMPSAdCallBackChannelMethod.onLoadSuccess:
+          case AMPSSplashAdCallBackChannelMethod.onLoadSuccess:
             mCallBack?.onLoadSuccess?.call();
             break;
-          case AMPSAdCallBackChannelMethod.onLoadFailure:
+          case AMPSSplashAdCallBackChannelMethod.onLoadFailure:
             mCloseCallBack?.call();
             var map = call.arguments as Map<dynamic, dynamic>;
             mCallBack?.onLoadFailure?.call(map[AMPSSdkCallBackErrorKey.code],
                 map[AMPSSdkCallBackErrorKey.message]);
             break;
-          case AMPSAdCallBackChannelMethod.onRenderOk:
+          case AMPSSplashAdCallBackChannelMethod.onRenderOk:
             mCallBack?.onRenderOk?.call();
             break;
-          case AMPSAdCallBackChannelMethod.onAdShow:
+          case AMPSSplashAdCallBackChannelMethod.onAdShow:
             mCallBack?.onAdShow?.call();
             break;
-          case AMPSAdCallBackChannelMethod.onAdExposure:
+          case AMPSSplashAdCallBackChannelMethod.onAdExposure:
             mCallBack?.onAdExposure?.call();
             break;
-          case AMPSAdCallBackChannelMethod.onAdClicked:
+          case AMPSSplashAdCallBackChannelMethod.onAdClicked:
             mCloseCallBack?.call();
             mCallBack?.onAdClicked?.call();
             break;
-          case AMPSAdCallBackChannelMethod.onAdClosed:
+          case AMPSSplashAdCallBackChannelMethod.onAdClosed:
             mCloseCallBack?.call();
             mCallBack?.onAdClosed?.call();
             break;
-          case AMPSAdCallBackChannelMethod.onRenderFailure:
+          case AMPSSplashAdCallBackChannelMethod.onRenderFailure:
             mCallBack?.onRenderFailure?.call();
             break;
-          case AMPSAdCallBackChannelMethod.onAdShowError:
+          case AMPSSplashAdCallBackChannelMethod.onAdShowError:
             mCloseCallBack?.call();
             var map = call.arguments as Map<dynamic, dynamic>;
             mCallBack?.onAdShowError?.call(map[AMPSSdkCallBackErrorKey.code],
                 map[AMPSSdkCallBackErrorKey.message]);
             break;
-          case AMPSAdCallBackChannelMethod.onVideoPlayStart:
+          case AMPSSplashAdCallBackChannelMethod.onVideoPlayStart:
             mCallBack?.onVideoPlayStart?.call();
             break;
-          case AMPSAdCallBackChannelMethod.onVideoPlayEnd:
+          case AMPSSplashAdCallBackChannelMethod.onVideoPlayEnd:
             mCallBack?.onVideoPlayEnd?.call();
             break;
-          case AMPSAdCallBackChannelMethod.onVideoPlayError:
+          case AMPSSplashAdCallBackChannelMethod.onVideoPlayError:
             var map = call.arguments as Map<dynamic, dynamic>;
             mCallBack?.onVideoPlayError?.call(map[AMPSSdkCallBackErrorKey.code],
                 map[AMPSSdkCallBackErrorKey.message]);
             break;
-          case AMPSAdCallBackChannelMethod.onVideoSkipToEnd:
+          case AMPSSplashAdCallBackChannelMethod.onVideoSkipToEnd:
             var map = call.arguments as Map<dynamic, dynamic>;
             mCallBack?.onVideoSkipToEnd?.call(map[AMPSSdkCallBackParamsKey.playDurationMs]);
             break;
-          case AMPSAdCallBackChannelMethod.onAdReward:
+          case AMPSSplashAdCallBackChannelMethod.onAdReward:
             mCallBack?.onAdReward?.call();
             break;
         }
@@ -82,42 +84,42 @@ class AMPSSplashAd {
 
   ///开屏广告加载调用
   void load() async {
-    await AdscopeSdk.channel.invokeMethod(AMPSAdSdkMethodNames.splashLoad);
+    await AdscopeSdk.invokeMethod(AMPSAdSdkMethodNames.splashLoad);
   }
 
   ///开屏广预加载
   void  preLoad() async {
-    await AdscopeSdk.channel
+    await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.splashPreLoad);
   }
 
   ///开屏广告显示调用
   void showAd({SplashBottomWidget? splashBottomWidget}) async {
-    await AdscopeSdk.channel.invokeMethod(
+    await AdscopeSdk.invokeMethod(
         AMPSAdSdkMethodNames.splashShowAd, splashBottomWidget?.toMap());
   }
 
   ///开屏广告是否有预加载
   Future<bool> isReadyAd() async {
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.splashIsReadyAd);
   }
 
   ///获取ecpm
   Future<num> getECPM() async {
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.splashGetECPM);
   }
 
   ///调用addPreLoadAdInfo
   void addPreLoadAdInfo() async {
-    await AdscopeSdk.channel
+    await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.splashAddPreLoadAdInfo);
   }
 
   ///调用addPreGetMediaExtraInfo
   Future<dynamic> addPreGetMediaExtraInfo() async {
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.splashAddPreGetMediaExtraInfo);
   }
 
@@ -126,7 +128,7 @@ class AMPSSplashAd {
   }
 
   Future destroy() {
-    return AdscopeSdk.channel
+    return AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.splashDestroy);
   }
 }

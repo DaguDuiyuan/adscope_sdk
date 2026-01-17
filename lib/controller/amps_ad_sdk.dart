@@ -7,11 +7,13 @@ import '../data/amps_init_config.dart';
 import '../data/amps_sdk_Init_status.dart';
 ///SDK初始化入口类
 class AMPSAdSDK {
+  static const String _initHandlerKey = "sdk_init_handler";
   static bool testModel = false;
   AMPSAdSDK._();
   /// 发送数据给native
   static Future<void> init(AMPSInitConfig sdkConfig,AMPSIInitCallBack callBack) async {
-    AdscopeSdk.channel.setMethodCallHandler(
+    AdscopeSdk.removeMethodCallHandler(_initHandlerKey);
+    AdscopeSdk.addMethodCallHandler(_initHandlerKey,
           (call) async {
         switch (call.method) {
           case AMPSInitChannelMethod.initSuccess:
@@ -30,17 +32,17 @@ class AMPSAdSDK {
             callBack.initFailed?.call(code, message);
             break;
         }
-      },
+      }
     );
     // 使用时
-    await AdscopeSdk.channel.invokeMethod(
+    await AdscopeSdk.invokeMethod(
       AMPSAdSdkMethodNames.init,
       sdkConfig.toMap(AMPSAdSDK.testModel),
     );
   }
 
   static Future<void> setPersonalRecommend(bool flag) async {
-    await AdscopeSdk.channel.invokeMethod(
+    await AdscopeSdk.invokeMethod(
       AMPSAdSdkMethodNames.setPersonalRecommend,
       flag,
     );
@@ -48,7 +50,7 @@ class AMPSAdSDK {
 
   ///获取SDK版本
   static Future<String> getSdkVersion() async {
-    final sdkVersion = await AdscopeSdk.channel.invokeMethod(
+    final sdkVersion = await AdscopeSdk.invokeMethod(
         AMPSAdSdkMethodNames.getSdkVersion
     );
     return sdkVersion;
@@ -56,7 +58,7 @@ class AMPSAdSDK {
 
   ///获取SDK状态
   static Future<AMPSSDKInitStatus?> getSdkInitStatus() async {
-    final statusCode = await AdscopeSdk.channel.invokeMethod(
+    final statusCode = await AdscopeSdk.invokeMethod(
         AMPSAdSdkMethodNames.getInitStatus
     );
     return AMPSSDKInitStatus.fromCode(statusCode);

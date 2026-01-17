@@ -2,7 +2,7 @@ package xyz.adscope.adscope_sdk.manager
 
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel.Result
-import xyz.adscope.adscope_sdk.data.AMPSAdCallBackChannelMethod
+import xyz.adscope.adscope_sdk.data.AMPSInterAdCallBackChannelMethod
 import xyz.adscope.adscope_sdk.data.AMPSAdSdkMethodNames
 import xyz.adscope.adscope_sdk.data.AdOptionsModule
 import xyz.adscope.adscope_sdk.data.ErrorModel
@@ -34,27 +34,28 @@ class AMPSInterstitialManager private constructor() {
 
     private val adCallback = object : AMPSInterstitialLoadEventListener {
         override fun onAmpsAdLoaded() {
-            sendMessage(AMPSAdCallBackChannelMethod.ON_LOAD_SUCCESS)
+            sendMessage(AMPSInterAdCallBackChannelMethod.ON_LOAD_SUCCESS)
             // 在旧代码中，这里也有 ON_RENDER_OK，如果 SDK 行为如此，则保留
-            sendMessage(AMPSAdCallBackChannelMethod.ON_RENDER_OK)
+            sendMessage(AMPSInterAdCallBackChannelMethod.ON_RENDER_OK)
         }
 
         override fun onAmpsAdShow() {
-            sendMessage(AMPSAdCallBackChannelMethod.ON_AD_SHOW)
+            println("sendMessageToFlutter: onAmpsAdShow")
+            sendMessage(AMPSInterAdCallBackChannelMethod.ON_AD_SHOW)
         }
 
         override fun onAmpsAdClicked() {
-            sendMessage(AMPSAdCallBackChannelMethod.ON_AD_CLICKED)
+            sendMessage(AMPSInterAdCallBackChannelMethod.ON_AD_CLICKED)
         }
 
         override fun onAmpsAdDismiss() {
-            sendMessage(AMPSAdCallBackChannelMethod.ON_AD_CLOSED)
+            sendMessage(AMPSInterAdCallBackChannelMethod.ON_AD_CLOSED)
             interstitialAd?.destroy()
         }
 
         override fun onAmpsAdFailed(error: AMPSError?) {
             sendMessage(
-                AMPSAdCallBackChannelMethod.ON_LOAD_FAILURE,
+                AMPSInterAdCallBackChannelMethod.ON_LOAD_FAILURE,
                 mapOf(
                     ErrorModel.CODE to (error?.code?.toInt() ?: -1),
                     ErrorModel.MESSAGE to error?.message
@@ -63,15 +64,15 @@ class AMPSInterstitialManager private constructor() {
         }
 
         override fun onAmpsSkippedAd() {
-            sendMessage(AMPSAdCallBackChannelMethod.ON_VIDEO_SKIP_TO_END)
+            sendMessage(AMPSInterAdCallBackChannelMethod.ON_VIDEO_SKIP_TO_END)
         }
 
         override fun onAmpsVideoPlayStart() {
-            sendMessage(AMPSAdCallBackChannelMethod.ON_VIDEO_PLAY_START)
+            sendMessage(AMPSInterAdCallBackChannelMethod.ON_VIDEO_PLAY_START)
         }
 
         override fun onAmpsVideoPlayEnd() {
-            sendMessage(AMPSAdCallBackChannelMethod.ON_VIDEO_PLAY_END)
+            sendMessage(AMPSInterAdCallBackChannelMethod.ON_VIDEO_PLAY_END)
         }
 
     }
@@ -145,6 +146,7 @@ class AMPSInterstitialManager private constructor() {
     }
 
     private fun sendMessage(method: String, args: Any? = null) {
+        println("sendMessageToFlutter: onAmpsAdShow method==$method")
         AMPSEventManager.getInstance().sendMessageToFlutter(method, args)
     }
 }

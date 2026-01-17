@@ -4,18 +4,20 @@ import 'package:adscope_sdk/amps_sdk_export.dart';
 import '../common.dart';
 
 class AMPSRewardVideoAd {
+  static const String _rewardAdHandlerKey = "reward_ad_handler";
   AdOptions config;
   RewardVideoCallBack? adCallBack;
 
   AMPSRewardVideoAd({required this.config, this.adCallBack}) {
-    AdscopeSdk.channel
+    AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.rewardVideoCreate, config.toMap());
 
     setMethodCallHandler();
   }
 
   void setMethodCallHandler() {
-    AdscopeSdk.channel.setMethodCallHandler(
+    AdscopeSdk.removeMethodCallHandler(_rewardAdHandlerKey);
+    AdscopeSdk.addMethodCallHandler(_rewardAdHandlerKey,
       (call) async {
         switch (call.method) {
           case AMPSRewardedVideoCallBackChannelMethod.onLoadSuccess:
@@ -65,47 +67,47 @@ class AMPSRewardVideoAd {
 
   ///激励视频广告加载调用
   void load() async {
-    await AdscopeSdk.channel.invokeMethod(AMPSAdSdkMethodNames.rewardVideoLoad);
+    await AdscopeSdk.invokeMethod(AMPSAdSdkMethodNames.rewardVideoLoad);
   }
 
   ///激励视频广预加载
   void preLoad() async {
-    await AdscopeSdk.channel
+    await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.rewardVideoPreLoad);
   }
 
   ///激励视频广告显示调用
   void showAd() async {
-    await AdscopeSdk.channel
+    await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.rewardVideoShowAd);
   }
 
   ///激励视频广告是否有预加载
   Future<bool> isReadyAd() async {
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.rewardVideoIsReadyAd);
   }
 
   ///销毁视频广告
   destroy() async {
-    AdscopeSdk.channel.invokeMethod(AMPSAdSdkMethodNames.rewardVideoDestroyAd);
+    AdscopeSdk.invokeMethod(AMPSAdSdkMethodNames.rewardVideoDestroyAd);
   }
 
   ///获取ecpm
   Future<num> getECPM() async {
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.rewardVideoGetECPM);
   }
 
   ///添加预加载广告
   addPreLoadAdInfo() async {
-    AdscopeSdk.channel
+    AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.rewardVideoAddPreLoadAdInfo);
   }
 
   ///获取MediaExtraInfo
   Future<dynamic> addPreGetMediaExtraInfo() async {
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMapMethod(AMPSAdSdkMethodNames.rewardVideoGetMediaExtraInfo);
   }
 }
