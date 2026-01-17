@@ -9,6 +9,7 @@ import '../data/amps_ad.dart';
 ///原生广告类
 class AMPSDrawAd {
   ///默认原生模式【鸿蒙中原生和自渲染是一样的调用入口；Android是两个不同的入口，所以这里需要说明文档说明】
+  static const String _drawAdHandlerKey = "draw_ad_handler";
   AdOptions config;
   AMPSDrawAdListener? mCallBack;
   AMPSDrawRenderListener? mRenderCallBack;
@@ -20,7 +21,8 @@ class AMPSDrawAd {
   AMPSDrawAd(
       {required this.config,
       this.mCallBack,this.mRenderCallBack}) {
-    AdscopeSdk.channel.setMethodCallHandler(
+    AdscopeSdk.removeMethodCallHandler(_drawAdHandlerKey);
+    AdscopeSdk.addMethodCallHandler(_drawAdHandlerKey,
       (call) async {
         switch (call.method) {
           case AmpsDrawCallbackChannelMethod.onLoadSuccess:
@@ -134,21 +136,21 @@ class AMPSDrawAd {
         }
       },
     );
-    AdscopeSdk.channel.invokeMethod(
+    AdscopeSdk.invokeMethod(
       AMPSAdSdkMethodNames.drawCreate,
       config.toMap(),
     );
   }
 
   void load() async {
-    AdscopeSdk.channel.invokeMethod(
+    AdscopeSdk.invokeMethod(
       AMPSAdSdkMethodNames.drawLoad);
   }
 
   ///获取信息
   Future<dynamic> getMediaExtraInfo() async {
     try {
-      final mediaExtraInfo = await AdscopeSdk.channel.invokeMethod(
+      final mediaExtraInfo = await AdscopeSdk.invokeMethod(
           AMPSAdSdkMethodNames.drawGetMediaExtraInfo);
       return mediaExtraInfo;
     } on PlatformException catch (e) {
@@ -158,31 +160,31 @@ class AMPSDrawAd {
 
   ///获取是否有预加载
   Future<bool> isReadyAd(String adId) async {
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.drawIsReadyAd, adId);
   }
 
   ///获取ecpm
   Future<num> getECPM(String adId) async {
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.drawGetEcpm, adId);
   }
 
   ///页面销毁时调用
   void destroy() {
-    AdscopeSdk.channel
+    AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.drawDestroyAd);
   }
 
   ///失去焦点时调用
   void pauseAd() {
-    AdscopeSdk.channel
+    AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.drawPauseAd);
   }
 
   ///再次获取焦点时候调用
   void resumeAd() {
-    AdscopeSdk.channel
+    AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.drawResumeAd);
   }
 

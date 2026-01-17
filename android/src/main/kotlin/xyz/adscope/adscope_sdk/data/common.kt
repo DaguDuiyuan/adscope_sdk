@@ -35,20 +35,37 @@ object AMPSInitChannelMethod {
 }
 
 object AMPSAdCallBackChannelMethod {
-    const val ON_LOAD_SUCCESS = "onLoadSuccess"
-    const val ON_LOAD_FAILURE = "onLoadFailure"
-    const val ON_RENDER_OK = "onRenderOk"
-    const val ON_AD_SHOW = "onAdShow"
-    const val ON_AD_EXPOSURE = "onAdExposure"
-    const val ON_AD_CLICKED = "onAdClicked"
-    const val ON_AD_CLOSED = "onAdClosed"
-    const val ON_RENDER_FAILURE = "onRenderFailure"
-    const val ON_AD_SHOW_ERROR = "onAdShowError"
-    const val ON_VIDEO_PLAY_START = "onVideoPlayStart"
-    const val ON_VIDEO_PLAY_END = "onVideoPlayEnd"
-    const val ON_VIDEO_PLAY_ERROR = "onVideoPlayError"
-    const val ON_VIDEO_SKIP_TO_END = "onVideoSkipToEnd"
-    const val ON_AD_REWARD = "onAdReward"
+    const val ON_LOAD_SUCCESS = "Splash_onLoadSuccess"
+    const val ON_LOAD_FAILURE = "Splash_onLoadFailure"
+    const val ON_RENDER_OK = "Splash_onRenderOk"
+    const val ON_AD_SHOW = "Splash_onAdShow"
+    const val ON_AD_EXPOSURE = "Splash_onAdExposure"
+    const val ON_AD_CLICKED = "Splash_onAdClicked"
+    const val ON_AD_CLOSED = "Splash_onAdClosed"
+    const val ON_RENDER_FAILURE = "Splash_onRenderFailure"
+    const val ON_AD_SHOW_ERROR = "Splash_onAdShowError"
+    const val ON_VIDEO_PLAY_START = "Splash_onVideoPlayStart"
+    const val ON_VIDEO_PLAY_END = "Splash_onVideoPlayEnd"
+    const val ON_VIDEO_PLAY_ERROR = "Splash_onVideoPlayError"
+    const val ON_VIDEO_SKIP_TO_END = "Splash_onVideoSkipToEnd"
+    const val ON_AD_REWARD = "Splash_onAdReward"
+}
+
+object AMPSInterAdCallBackChannelMethod {
+    const val ON_LOAD_SUCCESS = "Interstitial_onLoadSuccess"
+    const val ON_LOAD_FAILURE = "Interstitial_onLoadFailure"
+    const val ON_RENDER_OK = "Interstitial_onRenderOk"
+    const val ON_AD_SHOW = "Interstitial_onAdShow"
+    const val ON_AD_EXPOSURE = "Interstitial_onAdExposure"
+    const val ON_AD_CLICKED = "Interstitial_onAdClicked"
+    const val ON_AD_CLOSED = "Interstitial_onAdClosed"
+    const val ON_RENDER_FAILURE = "Interstitial_onRenderFailure"
+    const val ON_AD_SHOW_ERROR = "Interstitial_onAdShowError"
+    const val ON_VIDEO_PLAY_START = "Interstitial_onVideoPlayStart"
+    const val ON_VIDEO_PLAY_END = "Interstitial_onVideoPlayEnd"
+    const val ON_VIDEO_PLAY_ERROR = "Interstitial_onVideoPlayError"
+    const val ON_VIDEO_SKIP_TO_END = "Interstitial_onVideoSkipToEnd"
+    const val ON_AD_REWARD = "Interstitial_onAdReward"
 }
 
 object AMPSNativeCallBackChannelMethod {

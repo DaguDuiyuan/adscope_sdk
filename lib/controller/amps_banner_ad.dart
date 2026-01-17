@@ -7,12 +7,13 @@ import '../data/amps_ad.dart';
 
 ///开屏广告类
 class AMPSBannerAd {
+  static const String _bannerAdHandlerKey = "banner_ad_handler";
   AdOptions config;
   BannerCallBack? mCallBack;
   VoidCallback? mCloseCallBack;
 
   AMPSBannerAd({required this.config, this.mCallBack}) {
-    AdscopeSdk.channel.invokeMethod(
+    AdscopeSdk.invokeMethod(
       AMPSAdSdkMethodNames.bannerCreate,
       config.toMap(),
     );
@@ -20,7 +21,8 @@ class AMPSBannerAd {
   }
 
   void setMethodCallHandler() {
-    AdscopeSdk.channel.setMethodCallHandler(
+    AdscopeSdk.removeMethodCallHandler(_bannerAdHandlerKey);
+    AdscopeSdk.addMethodCallHandler(_bannerAdHandlerKey,
       (call) async {
         switch (call.method) {
           case AMPSBannerCallBackChannelMethod.onLoadSuccess:
@@ -69,47 +71,47 @@ class AMPSBannerAd {
 
   ///开屏广告加载调用
   void load() async {
-    await AdscopeSdk.channel.invokeMethod(AMPSAdSdkMethodNames.bannerLoad);
+    await AdscopeSdk.invokeMethod(AMPSAdSdkMethodNames.bannerLoad);
   }
 
   ///开屏广预加载
   void preLoad() async {
-    await AdscopeSdk.channel.invokeMethod(AMPSAdSdkMethodNames.bannerPreLoad);
+    await AdscopeSdk.invokeMethod(AMPSAdSdkMethodNames.bannerPreLoad);
   }
 
   ///开屏广告显示调用
   void setSlideTime(Int time) async {
-    await AdscopeSdk.channel.invokeMethod(
+    await AdscopeSdk.invokeMethod(
         AMPSAdSdkMethodNames.bannerSetSlideTime, time);
   }
 
   ///开屏广告是否有预加载
   Future<bool> isReadyAd() async {
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.bannerIsReadyAd);
   }
 
   ///获取ecpm
   Future<num> getECPM() async {
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.bannerGetECPM);
   }
 
   ///调用addPreLoadAdInfo
   void addPreLoadAdInfo() async {
-    await AdscopeSdk.channel
+    await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.bannerAddPreLoadAdInfo);
   }
 
   ///调用addPreGetMediaExtraInfo
   Future<dynamic> getMediaExtraInfo() async {
-    return await AdscopeSdk.channel
+    return await AdscopeSdk
         .invokeMethod(AMPSAdSdkMethodNames.bannerGetMediaExtraInfo);
   }
 
   ///销毁视频广告
   destroy() async {
-    AdscopeSdk.channel.invokeMethod(AMPSAdSdkMethodNames.bannerDestroyAd);
+    AdscopeSdk.invokeMethod(AMPSAdSdkMethodNames.bannerDestroyAd);
   }
 
   void registerChannel(VoidCallback callBack) {

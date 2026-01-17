@@ -53,16 +53,13 @@ object FlutterPluginUtil {
             if (Looper.getMainLooper() == Looper.myLooper()) {
                 runnable.run()
             } else {
-                getActivity()?.runOnUiThread(runnable)
-                    getApplicationContext()?.mainLooper?.let { looper ->
-                        android.os.Handler(looper).post(runnable)
-                    }
+                // 使用主线程 Handler 是最稳妥且统一的做法
+                android.os.Handler(Looper.getMainLooper()).post(runnable)
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
-
     /**
      * Fallback to system ApplicationContext (rarely needed)
      * Only use if no Activity is available

@@ -172,6 +172,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="biz.beizi.adn.ad.widget.activity.ASNPAdActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|screenLayout"
+            android:screenOrientation="portrait" />
         <!--BeiZiSDK start-->
         <provider
             android:name="androidx.core.content.FileProvider"

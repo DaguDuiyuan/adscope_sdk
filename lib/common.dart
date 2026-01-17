@@ -25,21 +25,39 @@ class AMPSInitChannelMethod {
 }
 
 ///开屏和插屏广告加载方法
-class AMPSAdCallBackChannelMethod {
-  static const String onLoadSuccess = "onLoadSuccess";
-  static const String onLoadFailure = "onLoadFailure";
-  static const String onRenderOk = "onRenderOk";
-  static const String onAdShow = "onAdShow";
-  static const String onAdExposure = "onAdExposure";
-  static const String onAdClicked = "onAdClicked";
-  static const String onAdClosed = "onAdClosed";
-  static const String onRenderFailure = "onRenderFailure";
-  static const String onAdShowError = "onAdShowError";
-  static const String onVideoPlayStart = "onVideoPlayStart";
-  static const String onVideoPlayEnd = "onVideoPlayEnd";
-  static const String onVideoPlayError = "onVideoPlayError";
-  static const String onVideoSkipToEnd = "onVideoSkipToEnd";
-  static const String onAdReward = "onAdReward";
+class AMPSSplashAdCallBackChannelMethod {
+  static const String onLoadSuccess = "Splash_onLoadSuccess";
+  static const String onLoadFailure = "Splash_onLoadFailure";
+  static const String onRenderOk = "Splash_onRenderOk";
+  static const String onAdShow = "Splash_onAdShow";
+  static const String onAdExposure = "Splash_onAdExposure";
+  static const String onAdClicked = "Splash_onAdClicked";
+  static const String onAdClosed = "Splash_onAdClosed";
+  static const String onRenderFailure = "Splash_onRenderFailure";
+  static const String onAdShowError = "Splash_onAdShowError";
+  static const String onVideoPlayStart = "Splash_onVideoPlayStart";
+  static const String onVideoPlayEnd = "Splash_onVideoPlayEnd";
+  static const String onVideoPlayError = "Splash_onVideoPlayError";
+  static const String onVideoSkipToEnd = "Splash_onVideoSkipToEnd";
+  static const String onAdReward = "Splash_onAdReward";
+}
+
+///插屏广告加载方法
+class AMPSInterstitialAdCallBackChannelMethod {
+  static const String onLoadSuccess = "Interstitial_onLoadSuccess";
+  static const String onLoadFailure = "Interstitial_onLoadFailure";
+  static const String onRenderOk = "Interstitial_onRenderOk";
+  static const String onAdShow = "Interstitial_onAdShow";
+  static const String onAdExposure = "Interstitial_onAdExposure";
+  static const String onAdClicked = "Interstitial_onAdClicked";
+  static const String onAdClosed = "Interstitial_onAdClosed";
+  static const String onRenderFailure = "Interstitial_onRenderFailure";
+  static const String onAdShowError = "Interstitial_onAdShowError";
+  static const String onVideoPlayStart = "Interstitial_onVideoPlayStart";
+  static const String onVideoPlayEnd = "Interstitial_onVideoPlayEnd";
+  static const String onVideoPlayError = "Interstitial_onVideoPlayError";
+  static const String onVideoSkipToEnd = "Interstitial_onVideoSkipToEnd";
+  static const String onAdReward = "Interstitial_onAdReward";
 }
 
 // 1. 先定义统一的回调方法常量（参考示例格式）
