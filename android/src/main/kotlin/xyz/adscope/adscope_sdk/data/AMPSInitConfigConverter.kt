@@ -151,12 +151,13 @@ class AMPSInitConfigConverter {
         (flutterParams[AMPSInitConfigKey.IS_DEBUG_SETTING] as? Boolean)?.let {
             ampsInitConfigBuilder.openDebugLog(it)
         }
-        (flutterParams[AMPSInitConfigKey.ADAPTER_NAMES] as? List<*>)?.let { names ->
-            val stringAdapterNames = names.mapNotNull { it as? String }
-            if (stringAdapterNames.isNotEmpty()) {
-                ampsInitConfigBuilder.setAdapterNameList(stringAdapterNames)
-            }
-        }
+        //原时端目前让关闭。其他端可用
+//        (flutterParams[AMPSInitConfigKey.ADAPTER_NAMES] as? List<*>)?.let { names ->
+//            val stringAdapterNames = names.mapNotNull { it as? String }
+//            if (stringAdapterNames.isNotEmpty()) {
+//                ampsInitConfigBuilder.setAdapterNameList(stringAdapterNames)
+//            }
+//        }
         (flutterParams[AMPSInitConfigKey.OPTION_INFO] as? String)?.let { ampsInitConfigBuilder.setOptionInfoMap(it) }
         (flutterParams[AMPSInitConfigKey.PROVINCE] as? String)?.let {
             ampsInitConfigBuilder.setProvince(it)

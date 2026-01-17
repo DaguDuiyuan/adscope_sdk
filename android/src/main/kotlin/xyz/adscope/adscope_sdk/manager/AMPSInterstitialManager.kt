@@ -40,7 +40,6 @@ class AMPSInterstitialManager private constructor() {
         }
 
         override fun onAmpsAdShow() {
-            println("sendMessageToFlutter: onAmpsAdShow")
             sendMessage(AMPSInterAdCallBackChannelMethod.ON_AD_SHOW)
         }
 
@@ -146,7 +145,6 @@ class AMPSInterstitialManager private constructor() {
     }
 
     private fun sendMessage(method: String, args: Any? = null) {
-        println("sendMessageToFlutter: onAmpsAdShow method==$method")
         AMPSEventManager.getInstance().sendMessageToFlutter(method, args)
     }
 }
