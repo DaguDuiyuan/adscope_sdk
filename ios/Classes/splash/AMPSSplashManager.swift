@@ -56,7 +56,6 @@ class AMPSSplashManager: NSObject {
         let config = AdOptionModule.getAdConfig(para: param)
         splashAd = AMPSSplashAd(spaceId: config.spaceId, adConfiguration: config)
         splashAd?.delegate = self
-        splashAd?.load()
         result(true)
     }
 //    // MARK: - Private Methods
