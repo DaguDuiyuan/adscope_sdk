@@ -56,7 +56,6 @@ class AMPSSplashManager: NSObject {
         let config = AdOptionModule.getAdConfig(para: param)
         splashAd = AMPSSplashAd(spaceId: config.spaceId, adConfiguration: config)
         splashAd?.delegate = self
-        splashAd?.load()
         result(true)
     }
 //    // MARK: - Private Methods
@@ -266,27 +265,27 @@ class AMPSSplashManager: NSObject {
 
 extension AMPSSplashManager: AMPSSplashAdDelegate {
     func ampsSplashAdLoadSuccess(_ splashAd: AMPSSplashAd) {
-        sendMessage(AMPSAdCallBackChannelMethod.onLoadSuccess)
-        sendMessage(AMPSAdCallBackChannelMethod.onRenderOk)
+        sendMessage(AMPSSplashAdCallBackChannelMethod.onLoadSuccess)
+        sendMessage(AMPSSplashAdCallBackChannelMethod.onRenderOk)
     }
     func ampsSplashAdLoadFail(_ splashAd: AMPSSplashAd, error: (any Error)?) {
-        sendMessage(AMPSAdCallBackChannelMethod.onLoadFailure, ["code": (error as? NSError)?.code ?? 0,"message":(error as? NSError)?.localizedDescription ?? ""])
+        sendMessage(AMPSSplashAdCallBackChannelMethod.onLoadFailure, ["code": (error as? NSError)?.code ?? 0,"message":(error as? NSError)?.localizedDescription ?? ""])
     }
     func ampsSplashAdDidShow(_ splashAd: AMPSSplashAd) {
-        sendMessage(AMPSAdCallBackChannelMethod.onAdShow)
+        sendMessage(AMPSSplashAdCallBackChannelMethod.onAdShow)
     }
     func ampsSplashAdExposured(_ splashAd: AMPSSplashAd){
-        sendMessage(AMPSAdCallBackChannelMethod.onAdExposure)
+        sendMessage(AMPSSplashAdCallBackChannelMethod.onAdExposure)
     }
     func ampsSplashAdDidClick(_ splashAd: AMPSSplashAd) {
-        sendMessage(AMPSAdCallBackChannelMethod.onAdClicked)
+        sendMessage(AMPSSplashAdCallBackChannelMethod.onAdClicked)
     }
     
     func ampsSplashAdShowFail(_ splashAd: AMPSSplashAd, error: (any Error)?) {
-        sendMessage(AMPSAdCallBackChannelMethod.onAdShowError,["code": (error as? NSError)?.code ?? 0,"message":(error as? NSError)?.localizedDescription ?? ""])
+        sendMessage(AMPSSplashAdCallBackChannelMethod.onAdShowError,["code": (error as? NSError)?.code ?? 0,"message":(error as? NSError)?.localizedDescription ?? ""])
     }
     func ampsSplashAdDidClose(_ splashAd: AMPSSplashAd) {
-        sendMessage(AMPSAdCallBackChannelMethod.onAdClosed)
+        sendMessage(AMPSSplashAdCallBackChannelMethod.onAdClosed)
         cleanupViewsAfterAdClosed()
     }
 }

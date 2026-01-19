@@ -91,27 +91,27 @@ class AMPSInterstitialManager: NSObject {
 
 extension AMPSInterstitialManager : AMPSInterstitialAdDelegate {
     func ampsInterstitialAdLoadSuccess(_ interstitialAd: AMPSInterstitialAd) {
-        sendMessage(AMPSAdCallBackChannelMethod.onLoadSuccess)
-        sendMessage(AMPSAdCallBackChannelMethod.onRenderOk)
+        sendMessage(AMPSInterstitialAdCallBackChannelMethod.onLoadSuccess)
+        sendMessage(AMPSInterstitialAdCallBackChannelMethod.onRenderOk)
     }
     func ampsInterstitialAdLoadFail(_ interstitialAd: AMPSInterstitialAd, error: (any Error)?) {
-        sendMessage(AMPSAdCallBackChannelMethod.onLoadFailure, ["code": (error as? NSError)?.code ?? 0,"message":(error as? NSError)?.localizedDescription ?? ""])
+        sendMessage(AMPSInterstitialAdCallBackChannelMethod.onLoadFailure, ["code": (error as? NSError)?.code ?? 0,"message":(error as? NSError)?.localizedDescription ?? ""])
     }
     func ampsInterstitialAdDidShow(_ interstitialAd: AMPSInterstitialAd) {
-        sendMessage(AMPSAdCallBackChannelMethod.onAdShow)
+        sendMessage(AMPSInterstitialAdCallBackChannelMethod.onAdShow)
     }
     func ampsInterstitialAdExposured(_ interstitialAd: AMPSInterstitialAd){
-        sendMessage(AMPSAdCallBackChannelMethod.onAdExposure)
+        sendMessage(AMPSInterstitialAdCallBackChannelMethod.onAdExposure)
     }
     func ampsInterstitialAdDidClick(_ interstitialAd: AMPSInterstitialAd) {
-        sendMessage(AMPSAdCallBackChannelMethod.onAdClicked)
+        sendMessage(AMPSInterstitialAdCallBackChannelMethod.onAdClicked)
     }
     
     func ampsInterstitialAdShowFail(_ interstitialAd: AMPSInterstitialAd, error: (any Error)?) {
-        sendMessage(AMPSAdCallBackChannelMethod.onAdShowError,["code": (error as? NSError)?.code ?? 0,"message":(error as? NSError)?.localizedDescription ?? ""])
+        sendMessage(AMPSInterstitialAdCallBackChannelMethod.onAdShowError,["code": (error as? NSError)?.code ?? 0,"message":(error as? NSError)?.localizedDescription ?? ""])
     }
     func ampsInterstitialAdDidClose(_ interstitialAd: AMPSInterstitialAd) {
-        sendMessage(AMPSAdCallBackChannelMethod.onAdClosed)
+        sendMessage(AMPSInterstitialAdCallBackChannelMethod.onAdClosed)
         cleanupViewsAfterAdClosed()
     }
 }

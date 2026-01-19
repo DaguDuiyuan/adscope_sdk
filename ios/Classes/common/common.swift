@@ -48,23 +48,43 @@ enum AMPSInitChannelMethod {
     static let initFailed = "initFailed"
 }
 
-// 广告回调方法名
-enum AMPSAdCallBackChannelMethod {
-    static let onLoadSuccess = "onLoadSuccess"
-    static let onLoadFailure = "onLoadFailure"
-    static let onRenderOk = "onRenderOk"
-    static let onAdShow = "onAdShow"
-    static let onAdExposure = "onAdExposure"
-    static let onAdClicked = "onAdClicked"
-    static let onAdClosed = "onAdClosed"
-    static let onRenderFailure = "onRenderFailure"
-    static let onAdShowError = "onAdShowError"
-    static let onVideoPlayStart = "onVideoPlayStart"
-    static let onVideoPlayEnd = "onVideoPlayEnd"
-    static let onVideoPlayError = "onVideoPlayError"
-    static let onVideoSkipToEnd = "onVideoSkipToEnd"
-    static let onAdReward = "onAdReward"
+
+//开屏广告加载方法
+class AMPSSplashAdCallBackChannelMethod {
+  static let onLoadSuccess = "Splash_onLoadSuccess";
+  static let onLoadFailure = "Splash_onLoadFailure";
+  static let onRenderOk = "Splash_onRenderOk";
+  static let onAdShow = "Splash_onAdShow";
+  static let onAdExposure = "Splash_onAdExposure";
+  static let onAdClicked = "Splash_onAdClicked";
+  static let onAdClosed = "Splash_onAdClosed";
+  static let onRenderFailure = "Splash_onRenderFailure";
+  static let onAdShowError = "Splash_onAdShowError";
+  static let onVideoPlayStart = "Splash_onVideoPlayStart";
+  static let onVideoPlayEnd = "Splash_onVideoPlayEnd";
+  static let onVideoPlayError = "Splash_onVideoPlayError";
+  static let onVideoSkipToEnd = "Splash_onVideoSkipToEnd";
+  static let onAdReward = "Splash_onAdReward";
 }
+
+//插屏广告加载方法
+class AMPSInterstitialAdCallBackChannelMethod {
+  static let onLoadSuccess = "Interstitial_onLoadSuccess";
+  static let onLoadFailure = "Interstitial_onLoadFailure";
+  static let onRenderOk = "Interstitial_onRenderOk";
+  static let onAdShow = "Interstitial_onAdShow";
+  static let onAdExposure = "Interstitial_onAdExposure";
+  static let onAdClicked = "Interstitial_onAdClicked";
+  static let onAdClosed = "Interstitial_onAdClosed";
+  static let onRenderFailure = "Interstitial_onRenderFailure";
+  static let onAdShowError = "Interstitial_onAdShowError";
+  static let onVideoPlayStart = "Interstitial_onVideoPlayStart";
+  static let onVideoPlayEnd = "Interstitial_onVideoPlayEnd";
+  static let onVideoPlayError = "Interstitial_onVideoPlayError";
+  static let onVideoSkipToEnd = "Interstitial_onVideoSkipToEnd";
+  static let onAdReward = "Interstitial_onAdReward";
+}
+
 // 1. 激励视频回调方法常量
 class AMPSRewardedVideoCallBackChannelMethod {
   static let onLoadSuccess = "RewardedVideo_onLoadSuccess";
