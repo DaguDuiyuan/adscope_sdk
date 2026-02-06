@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:adscope_sdk/amps_sdk_export.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'common.dart';
 
 class SplashWidget extends StatefulWidget {
