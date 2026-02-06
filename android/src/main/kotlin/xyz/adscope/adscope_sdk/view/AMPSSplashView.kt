@@ -56,8 +56,6 @@ class AMPSSplashView(
             rootPlatformView = FrameLayout(context).apply {
                 layoutParams = ViewGroup.LayoutParams(0, 0)
             }
-            AMPSEventManager.getInstance().sendMessageToFlutter(
-                AMPSAdCallBackChannelMethod.ON_AD_CLOSED,null)
         }
 
     }

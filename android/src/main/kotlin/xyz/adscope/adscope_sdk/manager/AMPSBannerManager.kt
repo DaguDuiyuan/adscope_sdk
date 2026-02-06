@@ -41,7 +41,6 @@ class AMPSBannerManager private constructor() {
         }
 
         override fun onAmpsAdDismiss() {
-            cleanupViewsAfterAdClosed()
             sendMessage(AMPSBannerCallbackChannelMethod.ON_AD_CLOSED)
         }
 
@@ -62,14 +61,6 @@ class AMPSBannerManager private constructor() {
         return this.mBannerAd
     }
 
-    /**
-     * 清理广告关闭后相关的视图和资源。
-     * @param
-     */
-    private fun cleanupViewsAfterAdClosed() {
-        mBannerAd?.destroy()
-        mBannerAd = null
-    }
 
     @Suppress("UNCHECKED_CAST")
     fun handleMethodCall(call: MethodCall, result: Result) {

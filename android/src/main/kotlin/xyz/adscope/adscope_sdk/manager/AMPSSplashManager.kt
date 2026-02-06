@@ -80,8 +80,6 @@ class AMPSSplashManager private constructor() {
         contentView?.findViewWithTag<View>("splash_main_container_tag")?.let { viewToRemove ->
             contentView.removeView(viewToRemove)
         }
-        mSplashAd?.destroy()
-        mSplashAd = null
         SplashBottomModule.current = null
     }
 

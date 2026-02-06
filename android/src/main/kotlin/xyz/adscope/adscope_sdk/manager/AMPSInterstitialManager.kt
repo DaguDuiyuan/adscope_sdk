@@ -49,7 +49,6 @@ class AMPSInterstitialManager private constructor() {
 
         override fun onAmpsAdDismiss() {
             sendMessage(AMPSInterAdCallBackChannelMethod.ON_AD_CLOSED)
-            interstitialAd?.destroy()
         }
 
         override fun onAmpsAdFailed(error: AMPSError?) {
