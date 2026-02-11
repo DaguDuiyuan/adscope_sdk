@@ -49,6 +49,9 @@ class AMPSRewardVideoManager: NSObject {
         }
         
         let config = AdOptionModule.getAdConfig(para: param)
+        if let temp = config.customExtraDict as? [String: [String: String]]{
+            config.customExtraDict = temp
+        }
         rewardVideoAd = AMPSRewardedVideoAd(spaceId: config.spaceId, adConfiguration: config)
         result(nil)
     }

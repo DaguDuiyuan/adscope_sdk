@@ -61,18 +61,19 @@ class _SplashPageState extends State<NativePage> {
     Map<String,dynamic>? customExtraMap;
     if(Platform.isAndroid) {
       customExtraMap = <String, dynamic>{
-        NativeAdCustomSize.ampsAsnpNativeHeight: expressHeight.toInt(),
-        NativeAdCustomSize.ampsAsnpNativeWidth: expressWidth.toInt()
+        NativeAdCustomSize.ampsAsnpNativeWidth: expressWidth.toInt(),
+        NativeAdCustomSize.ampsAsnpNativeHeight: expressHeight.toInt()
       };
     } else {
       customExtraMap = <String, dynamic>{
-
+        AmpsIosConstants.ampsAdnGm: [expressWidth, expressHeight]
       };
     }
     AdOptions options = AdOptions(
         spaceId: nativeSpaceId,
         adCount: 2,
-        expressSize: [expressWidth, expressHeight]
+        expressSize: [expressWidth, expressHeight],
+        customExtraMap: customExtraMap
     );
     _nativeAd = AMPSNativeAd(
         config: options,

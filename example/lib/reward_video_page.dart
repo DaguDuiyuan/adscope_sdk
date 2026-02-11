@@ -67,23 +67,23 @@ class _RewardVideoPageState extends State<RewardVideoPage> {
       };
     } else if (Platform.isIOS) {
       extraDataMap = {
-        "GDT": {
+        AmpsIosConstants.ampsAdnGdt: {
           "userID": "111",
           "extra": '{"orderId":"order001"}',
         },
-        "KS": {
+        AmpsIosConstants.ampsAdnKs: {
           "userID": "222",
           "extra": '{"orderId":"order001"}',
         },
-        "CSJ": {
+        AmpsIosConstants.ampsAdnCsj: {
           "userID": "333",
           "extra": '{"orderId":"order001"}',
         },
-        "GM": {
+        AmpsIosConstants.ampsAdnGm: {
           "userID": "444",
           "extra": '{"orderId":"order001"}',
         },
-        "BD": {
+        AmpsIosConstants.ampsAdnBd: {
           "userID": "555",
           "extra": '{"orderId":"order001"}',
         },

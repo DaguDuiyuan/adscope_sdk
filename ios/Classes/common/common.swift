@@ -243,6 +243,8 @@ enum AdOptionKeys{
     static let keyUserId = "userId"
     static let keyExtra = "extra"
     static let keyIpAddress = "ipAddress"
+    static let keyCustomExtraParameters = "customExtraParameters"
+    static let keyExtraDataMap = "extraDataMap"
 }
 
 enum ArgumentKeys {

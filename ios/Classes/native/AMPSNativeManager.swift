@@ -80,6 +80,19 @@ class AMPSNativeManager: NSObject {
             return
         }
         let configAM = AdOptionModule.getAdConfig(para: arguments)
+        if let tamp = configAM.customExtraDict as? [String: [CGFloat]]{
+            let dic:[String: [String:NSValue]] = tamp.mapValues({ floatValues in
+                // 判断数组元素数量，不足2个则返回CGSize.zero，否则取前两个值
+                let size: CGSize
+                if floatValues.count >= 2 {
+                    size = CGSize(width: floatValues[0], height: floatValues[1])
+                } else {
+                    size = .zero // 不足2个元素时设为(0, 0)
+                }
+                 return ["adSize": NSValue(cgSize: size)]
+            })
+            configAM.customExtraDict = dic
+        }
         if configAM.adSize.width == 0 {
             configAM.adSize.width = UIScreen.main.bounds.width
         }
