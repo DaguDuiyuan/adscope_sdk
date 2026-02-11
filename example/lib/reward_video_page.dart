@@ -69,27 +69,23 @@ class _RewardVideoPageState extends State<RewardVideoPage> {
       extraDataMap = {
         "GDT": {
           "userID": "111",
-          "extra": "{\"orderId\":\"order001\"}", // 保留OC中的JSON字符串格式
+          "extra": '{"orderId":"order001"}',
         },
-        // KS平台
         "KS": {
           "userID": "222",
-          "extra": "{\"orderId\":\"order001\"}",
+          "extra": '{"orderId":"order001"}',
         },
-        // CSJ平台
         "CSJ": {
           "userID": "333",
-          "extra": "{\"orderId\":\"order001\"}",
+          "extra": '{"orderId":"order001"}',
         },
-        // GM平台
         "GM": {
           "userID": "444",
-          "extra": "{\"orderId\":\"order001\"}",
+          "extra": '{"orderId":"order001"}',
         },
-        // BD平台
         "BD": {
           "userID": "555",
-          "extra": "{\"orderId\":\"order001\"}",
+          "extra": '{"orderId":"order001"}',
         },
       };
     }
