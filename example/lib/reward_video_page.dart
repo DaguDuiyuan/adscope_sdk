@@ -55,44 +55,45 @@ class _RewardVideoPageState extends State<RewardVideoPage> {
     });
 
 
-// 2. 创建Map并赋值（核心逻辑）
-    Map<String, dynamic>? extraDataMap;
-    if (Platform.isAndroid) {
-      extraDataMap = <String, String>{
-        AmpsAndroidConstants.ampsAdnCsj: '{"name":"csj_data"}',
-        AmpsAndroidConstants.ampsAdnGm: '{"name":"gm_data"}',
-        AmpsAndroidConstants.ampsAdnKs: '{"name":"ks_data"}',
-        AmpsAndroidConstants.ampsAdnBd: '{"name":"bd_data"}',
-        AmpsAndroidConstants.ampsAdnGdt: '{"name":"gdt_data"}',
-      };
-    } else if (Platform.isIOS) {
-      extraDataMap = {
-        AmpsIosConstants.ampsAdnGdt: {
-          "userID": "111",
-          "extra": '{"orderId":"order001"}',
-        },
-        AmpsIosConstants.ampsAdnKs: {
-          "userID": "222",
-          "extra": '{"orderId":"order001"}',
-        },
-        AmpsIosConstants.ampsAdnCsj: {
-          "userID": "333",
-          "extra": '{"orderId":"order001"}',
-        },
-        AmpsIosConstants.ampsAdnGm: {
-          "userID": "444",
-          "extra": '{"orderId":"order001"}',
-        },
-        AmpsIosConstants.ampsAdnBd: {
-          "userID": "555",
-          "extra": '{"orderId":"order001"}',
-        },
-      };
-    }
+// 2. 需要给渠道氮素设置时候再选择渠道设置。
+//     Map<String, dynamic>? extraDataMap;
+//     if (Platform.isAndroid) {
+//       extraDataMap = <String, String>{
+//         AmpsAndroidConstants.ampsAdnCsj: '{"name":"csj_data"}',
+//         AmpsAndroidConstants.ampsAdnGm: '{"name":"gm_data"}',
+//         AmpsAndroidConstants.ampsAdnKs: '{"name":"ks_data"}',
+//         AmpsAndroidConstants.ampsAdnBd: '{"name":"bd_data"}',
+//         AmpsAndroidConstants.ampsAdnGdt: '{"name":"gdt_data"}',
+//       };
+//     } else if (Platform.isIOS) {
+//       extraDataMap = {
+//         AmpsIosConstants.ampsAdnGdt: {
+//           "userID": "111",
+//           "extra": '{"orderId":"order001"}',
+//         },
+//         AmpsIosConstants.ampsAdnKs: {
+//           "userID": "222",
+//           "extra": '{"orderId":"order001"}',
+//         },
+//         AmpsIosConstants.ampsAdnCsj: {
+//           "userID": "333",
+//           "extra": '{"orderId":"order001"}',
+//         },
+//         AmpsIosConstants.ampsAdnGm: {
+//           "userID": "444",
+//           "extra": '{"orderId":"order001"}',
+//         },
+//         AmpsIosConstants.ampsAdnBd: {
+//           "userID": "555",
+//           "extra": '{"orderId":"order001"}',
+//         },
+//       };
+//     }
 
     AdOptions options = AdOptions(
         spaceId: rewardVideoSpaceId,
-        extraDataMap: extraDataMap);
+        //extraDataMap: extraDataMap
+    );
     _rewardVideoAd =
         AMPSRewardVideoAd(config: options, adCallBack: _adCallBack);
   }

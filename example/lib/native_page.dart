@@ -57,23 +57,24 @@ class _SplashPageState extends State<NativePage> {
         feedAdList.remove(adId);
       });
     });
-    //TODO 如果需要特殊设置渠道狂高，如下案例【android 需要转为Int类型】
-    Map<String,dynamic>? customExtraMap;
-    if(Platform.isAndroid) {
-      customExtraMap = <String, dynamic>{
-        NativeAdCustomSize.ampsAsnpNativeWidth: expressWidth.toInt(),
-        NativeAdCustomSize.ampsAsnpNativeHeight: expressHeight.toInt()
-      };
-    } else {
-      customExtraMap = <String, dynamic>{
-        AmpsIosConstants.ampsAdnGm: [expressWidth, expressHeight]
-      };
-    }
+
+
+    //如果需要特殊设置渠道宽高，如下案例【android 需要转为Int类型】
+    // Map<String,dynamic>? customExtraMap;
+    // if(Platform.isAndroid) {
+    //   customExtraMap = <String, dynamic>{
+    //     NativeAdCustomSize.ampsAsnpNativeWidth: expressWidth.toInt(),
+    //     NativeAdCustomSize.ampsAsnpNativeHeight: expressHeight.toInt()
+    //   };
+    // } else {
+    //   customExtraMap = <String, dynamic>{
+    //     AmpsIosConstants.ampsAdnGm: [expressWidth, expressHeight]
+    //   };
+    // }
     AdOptions options = AdOptions(
         spaceId: nativeSpaceId,
         adCount: 2,
-        expressSize: [expressWidth, expressHeight],
-        customExtraMap: customExtraMap
+        expressSize: [expressWidth, expressHeight]
     );
     _nativeAd = AMPSNativeAd(
         config: options,
