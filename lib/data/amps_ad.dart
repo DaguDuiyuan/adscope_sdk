@@ -13,6 +13,7 @@ class AdOptions {
   final int? splashAdBottomBuilderHeight;
   final String? userId;
   final String? extra;
+  final Map<String,dynamic>? extraDataMap;
   final Map<String,dynamic>? customExtraMap;
   final String? ipAddress;
 
@@ -26,6 +27,7 @@ class AdOptions {
     this.splashAdBottomBuilderHeight,
     this.userId,
     this.extra,
+    this.extraDataMap,
     this.customExtraMap,
     this.ipAddress
   });
@@ -42,6 +44,7 @@ class AdOptions {
       'splashAdBottomBuilderHeight': splashAdBottomBuilderHeight,
       'userId': userId,
       'extra': extra,
+      'extraDataMap': extraDataMap,
       'customExtraParameters': customExtraMap,
       'ipAddress': ipAddress
     };
