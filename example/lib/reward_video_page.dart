@@ -89,8 +89,10 @@ class _RewardVideoPageState extends State<RewardVideoPage> {
         },
       };
     }
-    AdOptions options =
-        AdOptions(spaceId: rewardVideoSpaceId, extraDataMap: extraDataMap);
+
+    AdOptions options = AdOptions(
+        spaceId: rewardVideoSpaceId,
+        extraDataMap: extraDataMap);
     _rewardVideoAd =
         AMPSRewardVideoAd(config: options, adCallBack: _adCallBack);
   }

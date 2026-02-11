@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:adscope_sdk/amps_sdk_export.dart';
 import 'package:adscope_sdk_example/data/common.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +57,18 @@ class _SplashPageState extends State<NativePage> {
         feedAdList.remove(adId);
       });
     });
+    //TODO 如果需要特殊设置渠道狂高，如下案例【android 需要转为Int类型】
+    Map<String,dynamic>? customExtraMap;
+    if(Platform.isAndroid) {
+      customExtraMap = <String, dynamic>{
+        NativeAdCustomSize.ampsAsnpNativeHeight: expressHeight.toInt(),
+        NativeAdCustomSize.ampsAsnpNativeWidth: expressWidth.toInt()
+      };
+    } else {
+      customExtraMap = <String, dynamic>{
 
+      };
+    }
     AdOptions options = AdOptions(
         spaceId: nativeSpaceId,
         adCount: 2,
