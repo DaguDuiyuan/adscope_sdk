@@ -5,14 +5,7 @@ import 'package:adscope_sdk_example/data/common.dart';
 import 'package:adscope_sdk_example/widgets/blurred_background.dart';
 import 'package:adscope_sdk_example/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
-class AMPSConstants {
-  // 广告平台标识常量（与Java端保持一致）
-  static const String AMPS_ADN_CSJ = "AMPS_ADN_CSJ"; // 穿山甲
-  static const String AMPS_ADN_GM = "AMPS_ADN_GM";   // 广点通（或其他）
-  static const String AMPS_ADN_KS = "AMPS_ADN_KS";   // 快手
-  static const String AMPS_ADN_BD = "AMPS_ADN_BD";   // 百度
-  static const String AMPS_ADN_GDT = "AMPS_ADN_GDT"; // 腾讯广告
-}
+
 class RewardVideoPage extends StatefulWidget {
   const RewardVideoPage({super.key, required this.title});
 
@@ -66,11 +59,11 @@ class _RewardVideoPageState extends State<RewardVideoPage> {
     Map<String, dynamic>? extraDataMap;
     if (Platform.isAndroid) {
       extraDataMap = <String, String>{
-        AMPSConstants.AMPS_ADN_CSJ: '{"name":"csj_data"}',
-        AMPSConstants.AMPS_ADN_GM: '{"name":"gm_data"}',
-        AMPSConstants.AMPS_ADN_KS: '{"name":"ks_data"}',
-        AMPSConstants.AMPS_ADN_BD: '{"name":"bd_data"}',
-        AMPSConstants.AMPS_ADN_GDT: '{"name":"gdt_data"}',
+        AmpsAndroidConstants.ampsAdnCsj: '{"name":"csj_data"}',
+        AmpsAndroidConstants.ampsAdnGm: '{"name":"gm_data"}',
+        AmpsAndroidConstants.ampsAdnKs: '{"name":"ks_data"}',
+        AmpsAndroidConstants.ampsAdnBd: '{"name":"bd_data"}',
+        AmpsAndroidConstants.ampsAdnGdt: '{"name":"gdt_data"}',
       };
     } else if (Platform.isIOS) {
       extraDataMap = {

@@ -82,6 +82,13 @@ class AmpsAndroidConstants {
   static const String channelSdkFlClassname = 'com.maplehaze.adsdk.MaplehazeSDK';
   static const String channelSdkQyClassname = 'com.hy.andlib.ads.HYAdSdk';
 
+  // 渠道相关key
+  static const String ampsAdnCsj = "adn_csj";
+  static const String ampsAdnGm = "adn_gm";
+  static const String ampsAdnKs = "adn_ks";
+  static const String ampsAdnBd = "adn_bd";
+  static const String ampsAdnGdt = "adn_gdt";
+
   // Channel Adapter Init Classnames
   static const String channelAdapterInitClassnameAsnp =
       'xyz.adscope.amps.adapter.asnp.ASNPInitMediation';
