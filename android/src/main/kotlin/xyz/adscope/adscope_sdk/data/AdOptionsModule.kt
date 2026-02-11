@@ -78,6 +78,7 @@ object AdOptionsModule {
         val customExtra = map[AdOptionKeys.KEY_CUSTOM_EXTRA_PARAMETER] as? Map<String, Any>
         val userId = map[AdOptionKeys.KEY_USER_ID] as? String
         val extra = map[AdOptionKeys.KEY_EXTRA] as? String
+        val extraDataMap = map[AdOptionKeys.KEY_EXTRA_DATA_MAP] as? Map<String,String>
         val count = map[AdOptionKeys.KEY_COUNT] as? Int
         builder.setSpaceId(spaceId)
         if (userId != null) {
@@ -85,6 +86,9 @@ object AdOptionsModule {
         }
         if (extra != null) {
             builder.setExtraData(extra)
+        }
+        if (extraDataMap != null) {
+            builder.setExtraDataMap(extraDataMap)
         }
         if (count != null) {
             builder.setAdCount(count)
