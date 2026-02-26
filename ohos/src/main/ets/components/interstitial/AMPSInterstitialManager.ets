@@ -1,7 +1,7 @@
 import { Any, MethodCall, MethodResult } from '@ohos/flutter_ohos';
 import {
   AD_LOSS_REASON,
-  AD_SEC_PRICE, AD_WIN_PRICE, AMPSAdCallBackChannelMethod, AMPSAdSdkMethodNames } from '../common/common';
+  AD_SEC_PRICE, AD_WIN_PRICE, AMPSInterstitialAdCallBackChannelMethod, AMPSAdSdkMethodNames } from '../common/common';
 import { AMPSEventManager } from '../common/AMPSEventManager';
 import { ampsAd, AMPSInterstitialAd } from 'xyz.adscope.amps';
 import { AdOptionsModule } from '../common/AdOptionsModule';
@@ -14,27 +14,27 @@ export class AMPSInterstitialManager {
   private interstitialAd?: AMPSInterstitialAd
   // 优化回调定义，减少重复代码
   private callback: ampsAd.CallBack = {
-    onLoadSuccess: () => this.sendMessage(AMPSAdCallBackChannelMethod.onLoadSuccess),
+    onLoadSuccess: () => this.sendMessage(AMPSInterstitialAdCallBackChannelMethod.onLoadSuccess),
     onLoadFailure: (code: number, message: string) =>
-    this.sendMessage(AMPSAdCallBackChannelMethod.onLoadFailure, { code, message }),
-    onRenderOk: () => this.sendMessage(AMPSAdCallBackChannelMethod.onRenderOk),
-    onAdShow: () => this.sendMessage(AMPSAdCallBackChannelMethod.onAdShow),
-    onAdExposure: () => this.sendMessage(AMPSAdCallBackChannelMethod.onAdExposure),
-    onAdClicked: () => this.sendMessage(AMPSAdCallBackChannelMethod.onAdClicked),
+    this.sendMessage(AMPSInterstitialAdCallBackChannelMethod.onLoadFailure, { code, message }),
+    onRenderOk: () => this.sendMessage(AMPSInterstitialAdCallBackChannelMethod.onRenderOk),
+    onAdShow: () => this.sendMessage(AMPSInterstitialAdCallBackChannelMethod.onAdShow),
+    onAdExposure: () => this.sendMessage(AMPSInterstitialAdCallBackChannelMethod.onAdExposure),
+    onAdClicked: () => this.sendMessage(AMPSInterstitialAdCallBackChannelMethod.onAdClicked),
     onAdClosed: () => {
       this.cleanUp()
-      this.sendMessage(AMPSAdCallBackChannelMethod.onAdClosed)
+      this.sendMessage(AMPSInterstitialAdCallBackChannelMethod.onAdClosed)
     },
-    onRenderFailure: () => this.sendMessage(AMPSAdCallBackChannelMethod.onRenderFailure),
+    onRenderFailure: () => this.sendMessage(AMPSInterstitialAdCallBackChannelMethod.onRenderFailure),
     onAdShowError: (code: number, message: string) =>
-    this.sendMessage(AMPSAdCallBackChannelMethod.onAdShowError, { code, message }),
-    onVideoPlayStart: () => this.sendMessage(AMPSAdCallBackChannelMethod.onVideoPlayStart),
-    onVideoPlayEnd: () => this.sendMessage(AMPSAdCallBackChannelMethod.onVideoPlayEnd),
+    this.sendMessage(AMPSInterstitialAdCallBackChannelMethod.onAdShowError, { code, message }),
+    onVideoPlayStart: () => this.sendMessage(AMPSInterstitialAdCallBackChannelMethod.onVideoPlayStart),
+    onVideoPlayEnd: () => this.sendMessage(AMPSInterstitialAdCallBackChannelMethod.onVideoPlayEnd),
     onVideoPlayError: (code: number, message: string) =>
-    this.sendMessage(AMPSAdCallBackChannelMethod.onVideoPlayEnd, { code, message }),
+    this.sendMessage(AMPSInterstitialAdCallBackChannelMethod.onVideoPlayEnd, { code, message }),
     onVideoSkipToEnd: (playDurationMs?: number) =>
-    this.sendMessage(AMPSAdCallBackChannelMethod.onVideoSkipToEnd, { playDurationMs }),
-    onAdReward: () => this.sendMessage(AMPSAdCallBackChannelMethod.onAdReward)
+    this.sendMessage(AMPSInterstitialAdCallBackChannelMethod.onVideoSkipToEnd, { playDurationMs }),
+    onAdReward: () => this.sendMessage(AMPSInterstitialAdCallBackChannelMethod.onAdReward)
   };
 
   public static getInstance(): AMPSInterstitialManager {

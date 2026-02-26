@@ -28,6 +28,11 @@ struct AdOptionModule{
         if let timeout = para[AdOptionKeys.keyTimeoutInterval] as? TimeInterval {
             config.timeoutInterval = timeout
         }
+        if let customExtra = para[AdOptionKeys.keyCustomExtraParameters] as? [String: Any]{
+            config.customExtraDict = customExtra
+        }else if let customExtra = para[AdOptionKeys.keyExtraDataMap] as? [String: Any]{
+            config.customExtraDict = customExtra
+        }
         return config
     }
 

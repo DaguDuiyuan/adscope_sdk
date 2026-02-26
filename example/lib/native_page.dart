@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:adscope_sdk/amps_sdk_export.dart';
 import 'package:adscope_sdk_example/data/common.dart';
 import 'package:flutter/material.dart';
@@ -56,10 +58,23 @@ class _SplashPageState extends State<NativePage> {
       });
     });
 
+
+    //如果需要特殊设置渠道宽高，如下案例【android 需要转为Int类型】
+    // Map<String,dynamic>? customExtraMap;
+    // if(Platform.isAndroid) {
+    //   customExtraMap = <String, dynamic>{
+    //     NativeAdCustomSize.ampsAsnpNativeWidth: expressWidth.toInt(),
+    //     NativeAdCustomSize.ampsAsnpNativeHeight: expressHeight.toInt()
+    //   };
+    // } else {
+    //   customExtraMap = <String, dynamic>{
+    //     AmpsIosConstants.ampsAdnGm: [expressWidth, expressHeight]
+    //   };
+    // }
     AdOptions options = AdOptions(
         spaceId: nativeSpaceId,
-        adCount: 2,
-        expressSize: [expressWidth, expressHeight]
+        adCount: 2
+        //expressSize: [expressWidth, expressHeight]
     );
     _nativeAd = AMPSNativeAd(
         config: options,

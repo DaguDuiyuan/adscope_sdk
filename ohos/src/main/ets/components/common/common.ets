@@ -29,21 +29,38 @@ export class AMPSInitChannelMethod {
 }
 
 //开屏广告加载方法
-export class AMPSAdCallBackChannelMethod {
-  static readonly onLoadSuccess = "onLoadSuccess";
-  static readonly onLoadFailure = "onLoadFailure";
-  static readonly onRenderOk = "onRenderOk";
-  static readonly onAdShow = "onAdShow";
-  static readonly onAdExposure = "onAdExposure";
-  static readonly onAdClicked = "onAdClicked";
-  static readonly onAdClosed = "onAdClosed";
-  static readonly onRenderFailure = "onRenderFailure";
-  static readonly onAdShowError = "onAdShowError";
-  static readonly onVideoPlayStart = "onVideoPlayStart";
-  static readonly onVideoPlayEnd = "onVideoPlayEnd";
-  static readonly onVideoPlayError = "onVideoPlayError";
-  static readonly onVideoSkipToEnd = "onVideoSkipToEnd";
-  static readonly onAdReward = "onAdReward";
+export class AMPSSplashAdCallBackChannelMethod {
+  static readonly onLoadSuccess = "Splash_onLoadSuccess";
+  static readonly onLoadFailure = "Splash_onLoadFailure";
+  static readonly onRenderOk = "Splash_onRenderOk";
+  static readonly onAdShow = "Splash_onAdShow";
+  static readonly onAdExposure = "Splash_onAdExposure";
+  static readonly onAdClicked = "Splash_onAdClicked";
+  static readonly onAdClosed = "Splash_onAdClosed";
+  static readonly onRenderFailure = "Splash_onRenderFailure";
+  static readonly onAdShowError = "Splash_onAdShowError";
+  static readonly onVideoPlayStart = "Splash_onVideoPlayStart";
+  static readonly onVideoPlayEnd = "Splash_onVideoPlayEnd";
+  static readonly onVideoPlayError = "Splash_onVideoPlayError";
+  static readonly onVideoSkipToEnd = "Splash_onVideoSkipToEnd";
+  static readonly onAdReward = "Splash_onAdReward";
+}
+//插屏广告加载方法
+export class AMPSInterstitialAdCallBackChannelMethod {
+  static readonly onLoadSuccess = "Interstitial_onLoadSuccess";
+  static readonly onLoadFailure = "Interstitial_onLoadFailure";
+  static readonly onRenderOk = "Interstitial_onRenderOk";
+  static readonly onAdShow = "Interstitial_onAdShow";
+  static readonly onAdExposure = "Interstitial_onAdExposure";
+  static readonly onAdClicked = "Interstitial_onAdClicked";
+  static readonly onAdClosed = "Interstitial_onAdClosed";
+  static readonly onRenderFailure = "Interstitial_onRenderFailure";
+  static readonly onAdShowError = "Interstitial_onAdShowError";
+  static readonly onVideoPlayStart = "Interstitial_onVideoPlayStart";
+  static readonly onVideoPlayEnd = "Interstitial_onVideoPlayEnd";
+  static readonly onVideoPlayError = "Interstitial_onVideoPlayError";
+  static readonly onVideoSkipToEnd = "Interstitial_onVideoSkipToEnd";
+  static readonly onAdReward = "Interstitial_onAdReward";
 }
 // 1. 激励视频回调方法常量（参考示例格式）
 export class AMPSRewardedVideoCallBackChannelMethod {
@@ -74,6 +91,7 @@ export class AMPSBannerCallBackChannelMethod {
   static readonly onVideoPause = "Banner_onVideoPause";
   static readonly onVideoResume = "Banner_onVideoResume";
 }
+
 export class AmpsDrawCallbackChannelMethod {
   static readonly onLoadSuccess = "Draw_onLoadSuccess";
   static readonly onLoadFailure = "Draw_onLoadFailure";

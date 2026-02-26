@@ -49,6 +49,7 @@ class _InterstitialPageState extends State<InterstitialPage> {
   @override
   void dispose() {
     super.dispose();
+    _interAd?.destroy();
   }
   @override
   Widget build(BuildContext context) {

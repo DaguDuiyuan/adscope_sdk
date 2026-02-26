@@ -11,6 +11,7 @@ object AdOptionKeys {
     const val KEY_SPACE_ID = "spaceId"
     const val KEY_TIMEOUT_INTERVAL = "timeoutInterval"
     const val KEY_EXPRESS_SIZE = "expressSize"
+    const val KEY_EXTRA_DATA_MAP = "extraDataMap"
     const val KEY_USER_ID = "userId"
     const val KEY_EXTRA = "extra"
     const val KEY_CUSTOM_EXTRA_PARAMETER = "customExtraParameters"
@@ -29,6 +30,7 @@ object AdOptionsModule {
         val timeoutInterval = map[AdOptionKeys.KEY_TIMEOUT_INTERVAL] as? Number
         val userId = map[AdOptionKeys.KEY_USER_ID] as? String
         val extra = map[AdOptionKeys.KEY_EXTRA] as? String
+        val extraDataMap = map[AdOptionKeys.KEY_EXTRA_DATA_MAP] as? Map<String,String>
         val customExtra = map[AdOptionKeys.KEY_CUSTOM_EXTRA_PARAMETER] as? Map<String, Any>
         val count = map[AdOptionKeys.KEY_COUNT] as? Int
         val expressSize = map[AdOptionKeys.KEY_EXPRESS_SIZE] as? ArrayList<Int>
@@ -47,6 +49,9 @@ object AdOptionsModule {
         }
         if (customExtra != null) {
             builder.setCustomExtraParameters(customExtra)
+        }
+        if (extraDataMap != null) {
+            builder.setExtraDataMap(extraDataMap)
         }
         builder.setWidth(AMPSScreenUtil.getScreenWidth(context))
         builder.setHeight(AMPSScreenUtil.getScreenHeight(context))
@@ -73,6 +78,7 @@ object AdOptionsModule {
         val customExtra = map[AdOptionKeys.KEY_CUSTOM_EXTRA_PARAMETER] as? Map<String, Any>
         val userId = map[AdOptionKeys.KEY_USER_ID] as? String
         val extra = map[AdOptionKeys.KEY_EXTRA] as? String
+        val extraDataMap = map[AdOptionKeys.KEY_EXTRA_DATA_MAP] as? Map<String,String>
         val count = map[AdOptionKeys.KEY_COUNT] as? Int
         builder.setSpaceId(spaceId)
         if (userId != null) {
@@ -80,6 +86,9 @@ object AdOptionsModule {
         }
         if (extra != null) {
             builder.setExtraData(extra)
+        }
+        if (extraDataMap != null) {
+            builder.setExtraDataMap(extraDataMap)
         }
         if (count != null) {
             builder.setAdCount(count)

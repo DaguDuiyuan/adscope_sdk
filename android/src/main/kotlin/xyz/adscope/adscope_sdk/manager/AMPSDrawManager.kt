@@ -158,15 +158,6 @@ class AMPSDrawManager private constructor() {
         return this.mDrawAd
     }
 
-    /**
-     * 清理广告关闭后相关的视图和资源。
-     * @param
-     */
-    private fun cleanupViewsAfterAdClosed() {
-        mDrawAd?.destroy()
-        mDrawAd = null
-    }
-
     @Suppress("UNCHECKED_CAST")
     fun handleMethodCall(call: MethodCall, result: Result) {
         when (call.method) {

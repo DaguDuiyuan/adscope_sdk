@@ -82,6 +82,13 @@ class AmpsAndroidConstants {
   static const String channelSdkFlClassname = 'com.maplehaze.adsdk.MaplehazeSDK';
   static const String channelSdkQyClassname = 'com.hy.andlib.ads.HYAdSdk';
 
+  // 渠道相关key
+  static const String ampsAdnCsj = "adn_csj";
+  static const String ampsAdnGm = "adn_gm";
+  static const String ampsAdnKs = "adn_ks";
+  static const String ampsAdnBd = "adn_bd";
+  static const String ampsAdnGdt = "adn_gdt";
+
   // Channel Adapter Init Classnames
   static const String channelAdapterInitClassnameAsnp =
       'xyz.adscope.amps.adapter.asnp.ASNPInitMediation';
@@ -332,4 +339,62 @@ class ChannelName {
   static const String qm = '1030';
   static const String sigmob = '1031';
   static const String other = '9999';
+}
+
+/// 各广告平台原生广告尺寸的常量键名（小驼峰命名版）
+class NativeAdCustomSize {
+  // 私有化构造函数，禁止实例化
+  NativeAdCustomSize._();
+
+  // ASNP平台
+  static const String ampsAsnpNativeWidth = "amps_asnp_native_width";
+  static const String ampsAsnpNativeHeight = "amps_asnp_native_height";
+
+  // 百度（BD）平台
+  static const String ampsBdNativeWidth = "amps_bd_native_width";
+  static const String ampsBdNativeHeight = "amps_bd_native_height";
+
+  // BZ平台
+  static const String ampsBzNativeWidth = "amps_bz_native_width";
+  static const String ampsBzNativeHeight = "amps_bz_native_height";
+
+  // 穿山甲（CSJ）平台
+  static const String ampsCsjNativeWidth = "amps_csj_native_width";
+  static const String ampsCsjNativeHeight = "amps_csj_native_height";
+
+  // 广点通（GDT）平台
+  static const String ampsGdtNativeWidth = "amps_gdt_native_width";
+  static const String ampsGdtNativeHeight = "amps_gdt_native_height";
+
+  // GM平台
+  static const String ampsGmNativeWidth = "amps_gm_native_width";
+  static const String ampsGmNativeHeight = "amps_gm_native_height";
+
+  // 华为（HW）平台
+  static const String ampsHwNativeWidth = "amps_hw_native_width";
+  static const String ampsHwNativeHeight = "amps_hw_native_height";
+
+  // 京东（JD）平台
+  static const String ampsJdNativeWidth = "amps_jd_native_width";
+  static const String ampsJdNativeHeight = "amps_jd_native_height";
+
+  // 快手（KS）平台
+  static const String ampsKsNativeWidth = "amps_ks_native_width";
+  static const String ampsKsNativeHeight = "amps_ks_native_height";
+
+  // MIMO平台
+  static const String ampsMimoNativeWidth = "amps_mimo_native_width";
+  static const String ampsMimoNativeHeight = "amps_mimo_native_height";
+
+  // MS平台
+  static const String ampsMsNativeWidth = "amps_ms_native_width";
+  static const String ampsMsNativeHeight = "amps_ms_native_height";
+
+  // OPPO平台
+  static const String ampsOppoNativeWidth = "amps_oppo_native_width";
+  static const String ampsOppoNativeHeight = "amps_oppo_native_height";
+
+  // VIVO平台
+  static const String ampsVivoNativeWidth = "amps_vivo_native_width";
+  static const String ampsVivoNativeHeight = "amps_vivo_native_height";
 }

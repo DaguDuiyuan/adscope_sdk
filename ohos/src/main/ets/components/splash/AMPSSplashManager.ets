@@ -1,7 +1,8 @@
 import { Any, MethodCall, MethodResult } from '@ohos/flutter_ohos';
 import {
   AD_LOSS_REASON,
-  AD_SEC_PRICE, AD_WIN_PRICE, AMPSAdCallBackChannelMethod, AMPSAdSdkMethodNames } from '../common/common';
+  AD_SEC_PRICE, AD_WIN_PRICE, AMPSAdSdkMethodNames,
+  AMPSSplashAdCallBackChannelMethod } from '../common/common';
 import { AMPSEventManager } from '../common/AMPSEventManager';
 import { ampsAd, AMPSSplashAd } from 'xyz.adscope.amps';
 import { AdOptionsModule } from '../common/AdOptionsModule';
@@ -37,27 +38,27 @@ export class AMPSSplashManager {
 
   // 优化回调定义，减少重复代码
   private callback: ampsAd.CallBack = {
-    onLoadSuccess: () => this.sendMessage(AMPSAdCallBackChannelMethod.onLoadSuccess),
+    onLoadSuccess: () => this.sendMessage(AMPSSplashAdCallBackChannelMethod.onLoadSuccess),
     onLoadFailure: (code: number, message: string) =>
-    this.sendMessage(AMPSAdCallBackChannelMethod.onLoadFailure, { code, message }),
-    onRenderOk: () => this.sendMessage(AMPSAdCallBackChannelMethod.onRenderOk),
-    onAdShow: () => this.sendMessage(AMPSAdCallBackChannelMethod.onAdShow),
-    onAdExposure: () => this.sendMessage(AMPSAdCallBackChannelMethod.onAdExposure),
-    onAdClicked: () => this.sendMessage(AMPSAdCallBackChannelMethod.onAdClicked),
+    this.sendMessage(AMPSSplashAdCallBackChannelMethod.onLoadFailure, { code, message }),
+    onRenderOk: () => this.sendMessage(AMPSSplashAdCallBackChannelMethod.onRenderOk),
+    onAdShow: () => this.sendMessage(AMPSSplashAdCallBackChannelMethod.onAdShow),
+    onAdExposure: () => this.sendMessage(AMPSSplashAdCallBackChannelMethod.onAdExposure),
+    onAdClicked: () => this.sendMessage(AMPSSplashAdCallBackChannelMethod.onAdClicked),
     onAdClosed: () => {
       this.cleanUp()
-      this.sendMessage(AMPSAdCallBackChannelMethod.onAdClosed)
+      this.sendMessage(AMPSSplashAdCallBackChannelMethod.onAdClosed)
     },
-    onRenderFailure: () => this.sendMessage(AMPSAdCallBackChannelMethod.onRenderFailure),
+    onRenderFailure: () => this.sendMessage(AMPSSplashAdCallBackChannelMethod.onRenderFailure),
     onAdShowError: (code: number, message: string) =>
-    this.sendMessage(AMPSAdCallBackChannelMethod.onAdShowError, { code, message }),
-    onVideoPlayStart: () => this.sendMessage(AMPSAdCallBackChannelMethod.onVideoPlayStart),
-    onVideoPlayEnd: () => this.sendMessage(AMPSAdCallBackChannelMethod.onVideoPlayEnd),
+    this.sendMessage(AMPSSplashAdCallBackChannelMethod.onAdShowError, { code, message }),
+    onVideoPlayStart: () => this.sendMessage(AMPSSplashAdCallBackChannelMethod.onVideoPlayStart),
+    onVideoPlayEnd: () => this.sendMessage(AMPSSplashAdCallBackChannelMethod.onVideoPlayEnd),
     onVideoPlayError: (code: number, message: string) =>
-    this.sendMessage(AMPSAdCallBackChannelMethod.onVideoPlayEnd, { code, message }),
+    this.sendMessage(AMPSSplashAdCallBackChannelMethod.onVideoPlayEnd, { code, message }),
     onVideoSkipToEnd: (playDurationMs?: number) =>
-    this.sendMessage(AMPSAdCallBackChannelMethod.onVideoSkipToEnd, { playDurationMs }),
-    onAdReward: () => this.sendMessage(AMPSAdCallBackChannelMethod.onAdReward)
+    this.sendMessage(AMPSSplashAdCallBackChannelMethod.onVideoSkipToEnd, { playDurationMs }),
+    onAdReward: () => this.sendMessage(AMPSSplashAdCallBackChannelMethod.onAdReward)
   };
 
   handleMethodCall(call: MethodCall, result: MethodResult) {

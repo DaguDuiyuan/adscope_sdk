@@ -17,7 +17,7 @@ A new Flutter plugin project.
   s.dependency 'Flutter'
   s.dependency  'AMPSAdSDK'
 
-  s.platform = :ios, '13.0'
+  s.platform = :ios, '11.0'
 
 
   # Flutter.framework does not contain a i386 slice.

@@ -80,7 +80,11 @@ class _SplashShowPageState extends State<SplashShowPage> {
       }
     });
   }
-
+  @override
+  void dispose() {
+    super.dispose();
+    _splashAd?.destroy();
+  }
   @override
   Widget build(BuildContext context) {
     return PopScope(

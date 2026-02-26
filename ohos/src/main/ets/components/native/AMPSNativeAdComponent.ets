@@ -37,7 +37,7 @@ export struct AMPSNativeAdComponent {
           AMPSEventManager.getInstance().sendMessageToFlutter(AMPSNativeCallBackChannelMethod.nativeSizeUpdate, map)
         }
       })
-      .backgroundColor(Color.Green)
+      // .backgroundColor(Color.Green)
     }
     .alignItems(HorizontalAlign.Center)
     .justifyContent(FlexAlign.Center)

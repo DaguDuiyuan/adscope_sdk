@@ -31,11 +31,7 @@ class _SplashWidgetState extends State<SplashWidget> {
     }
     Widget view;
     if (Platform.isAndroid) {
-      view = AndroidView(
-          viewType: AMPSPlatformViewRegistry.ampsSdkSplashViewId,
-          creationParams: splashParam,
-          onPlatformViewCreated: _onPlatformViewCreated,
-          creationParamsCodec: const StandardMessageCodec());
+      view =  const Center(child: Text("Android端暂不支持组件方式"));
     } else if (Platform.isIOS) {
       view =  const Center(child: Text("IOS端暂不支持组件方式"));
     }
