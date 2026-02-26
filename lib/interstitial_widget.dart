@@ -32,11 +32,7 @@ class _InterstitialWidgetState extends State<InterstitialWidget> {
       view =  const Center(child: Text("IOS端暂不支持组件方式"));
     }
     else if (Platform.isOhos) {
-      view =  OhosView(
-          viewType: AMPSPlatformViewRegistry.ampsSdkInterstitialViewId,
-          onPlatformViewCreated: _onPlatformViewCreated,
-          creationParams: param,
-          creationParamsCodec: const StandardMessageCodec());
+      view =  const Center(child: Text("Harmony端暂不支持组件方式"));
     }
     else {
       view =  const Center(child: Text("暂不支持此平台"));

@@ -14,7 +14,7 @@ struct AMPSSplashComponent {
   }
 
   build() {
-    if (this.splashAd?.isReadyAd()) {
+    if (this.splashAd?.isReadyAd() && this.splashAd.isSupportViewBuilder()) {
       Column() {
         AMPSBuildSplashView(
           this.splashAd, {
