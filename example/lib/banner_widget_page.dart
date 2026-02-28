@@ -53,7 +53,7 @@ class _BannerWidgetPageState extends State<BannerWidgetPage> {
       AdOptions options = AdOptions(
           spaceId: bannerSpaceId, expressSize: [screenWidth-20, screenHeight]);
       _bannerAd = AMPSBannerAd(config: options, mCallBack: _adCallBack);
-      _bannerAd?.load();
+
     });
   }
 
@@ -73,10 +73,16 @@ class _BannerWidgetPageState extends State<BannerWidgetPage> {
           alignment: AlignmentDirectional.center,
           children: [
             const BlurredBackground(),
+            ButtonWidget(
+                buttonText: '点击加横幅广告',
+                callBack: () {
+                  _bannerAd?.load();
+                }),
             Column(children: [
               if (splashVisible) BannerWidget(_bannerAd),
               const SizedBox(height: 100, width: 0)
             ]),
+
           ],
         ));
   }

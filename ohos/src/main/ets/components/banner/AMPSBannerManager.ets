@@ -1,5 +1,5 @@
 import { Any, MethodCall, MethodResult } from '@ohos/flutter_ohos';
-import { ampsAd, AMPSBannerAd, AMPSBannerAdWrapper } from 'xyz.adscope.amps';
+import { AmLog, ampsAd, AMPSBannerAd, AMPSBannerAdWrapper } from 'xyz.adscope.amps';
 import { AdOptionsModule } from '../common/AdOptionsModule';
 import { AMPSEventManager } from '../common/AMPSEventManager';
 import { AMPSBannerCallBackChannelMethod, AMPSAdSdkMethodNames } from '../common/common';
@@ -24,6 +24,7 @@ export class AMPSBannerManager{
   }
 
   cleanUp(){
+    this.bannerAdItem?.destroy()
     this.bannerAd = undefined
     this.bannerAdItem = undefined
   }
@@ -47,6 +48,7 @@ export class AMPSBannerManager{
         break;
       case AMPSAdSdkMethodNames.bannerDestroyAd:
         this.cleanUp()
+        result.success(undefined);
         break;
       case AMPSAdSdkMethodNames.bannerIsReadyAd:
         result.success(this.bannerAd?.isReadyAd() ?? false);

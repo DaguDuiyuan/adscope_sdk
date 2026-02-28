@@ -130,7 +130,8 @@ export class AMPSDrawAdManager {
       case AMPSAdSdkMethodNames.drawResumeAd:
         result.success(null);
         break;
-
+      case AMPSAdSdkMethodNames.drawDestroyAd:
+        this.adItemMap.forEach((item,key)=>item.destroy())
       default:
         result.success(null);
     }

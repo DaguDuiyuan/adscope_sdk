@@ -149,6 +149,7 @@ export class AMPSAdSdkMethodNames {
   static readonly splashAddPreLoadAdInfo = "AMPSSplashAd_addPreLoadAdInfo";
   static readonly splashAddPreGetMediaExtraInfo = "AMPSSplashAd_getMediaExtraInfo";
   static readonly splashIsReadyAd = 'AMPSSplashAd_isReadyAd';
+  static readonly splashDestroy = "AMPSSplashAd_destroy";
 
   //插屏
   static readonly interstitialCreate = "AMPSInterstitial_create";
@@ -159,6 +160,7 @@ export class AMPSAdSdkMethodNames {
   static readonly interstitialAddPreLoadAdInfo = "AMPSInterstitial_addPreLoadAdInfo";
   static readonly interstitialGetMediaExtraInfo = "AMPSInterstitial_getMediaExtraInfo";
   static readonly interstitialIsReadyAd = 'AMPSInterstitial_isReadyAd';
+  static readonly interstitialDestroy = "AMPSInterstitial_destroy";
 
 
   static readonly nativeLoad = 'AMPSNative_load';
@@ -171,6 +173,9 @@ export class AMPSAdSdkMethodNames {
   static readonly nativeGetVideoDuration = 'AMPSNative_getVideoDuration';
   // static readonly nativeSetVideoPlayConfig = 'AMPSNative_setVideoPlayConfig';
   static readonly nativeGetMediaExtraInfo = "AMPSNative_getMediaExtraInfo";
+  static readonly nativeDestroy = "AMPSNative_destroy";
+  static readonly nativeResume = "AMPSNative_resume";
+  static readonly nativePause = "AMPSNative_pause";
 
 
   static readonly rewardVideoCreate = 'AMPSRewardVideo_create';

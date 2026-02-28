@@ -18,6 +18,7 @@ import { AdOptionsModule } from '../common/AdOptionsModule';
 import { window } from '@kit.ArkUI';
 import { AdWrapperManager } from '../native/AdWrapperManager';
 import { AMPSEventManager } from '../common/AMPSEventManager';
+import { thirdPaymentService } from '@kit.PaymentKit';
 
 export class AMPSNativeManager {
   private static instance: AMPSNativeManager;
@@ -125,6 +126,9 @@ export class AMPSNativeManager {
         const duration = wrapperByAdId?.getVideoDuration() ?? 0
         result.success(duration);
         break;
+      case AMPSAdSdkMethodNames.nativeDestroy:
+        AdWrapperManager.getInstance().allItem().forEach(ele=>ele.destroy())
+        result.success(null);
 
       default:
         result.success(null);

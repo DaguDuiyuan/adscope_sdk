@@ -82,6 +82,10 @@ export class AMPSSplashManager {
       case AMPSAdSdkMethodNames.splashIsReadyAd:
         result.success(this.mSplashAd?.isReadyAd() ?? false);
         break;
+      case AMPSAdSdkMethodNames.splashDestroy:
+        this.mSplashAd = undefined
+        result.success(null)
+      break
       default:
         result.success(null);
     }

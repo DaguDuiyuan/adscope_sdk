@@ -35,6 +35,9 @@ export class AdWrapperManager {
     }
   }
 
+  public allItem():AMPSNativeAdWrapper[]{
+    return Array.from(this.adMap.values())
+  }
   /**
    * 根据 adId 获取广告实例
    * @param adId 广告的唯一 ID
