@@ -14,14 +14,14 @@ class SplashBottomBaseChild {
 }
 
 // 继承通用父类，并补充自身特有属性
-class SplashBottomImageChild extends SplashBottomBaseChild {
+export class SplashBottomImageChild extends SplashBottomBaseChild {
   width?: number;
   height?: number;
   imagePath?: string;
 }
 
 // 继承通用父类，并补充自身特有属性
-class SplashBottomTextChild extends SplashBottomBaseChild {
+export class SplashBottomTextChild extends SplashBottomBaseChild {
   fontSize?: number;
   color?: string;
   text?: string;
@@ -29,8 +29,8 @@ class SplashBottomTextChild extends SplashBottomBaseChild {
 
 export class SplashBottomModule {
   // 使用类型更明确的数组
-  imgChildren?: SplashBottomImageChild;
-  textChildren?: SplashBottomTextChild;
+  imgChildrens?: SplashBottomImageChild[];
+  textChildrens?: SplashBottomTextChild[];
   height: number = 0;
   backgroundColor: string = "#00000000";
   initialized: boolean = false;
@@ -52,18 +52,22 @@ export class SplashBottomModule {
     if (!childsMap) {
       return;
     }
-
-    childsMap.forEach((childMap: Map<string, Any>) => {
-      // 使用 switch 语句代替 if-else，结构更清晰
-      switch (childMap.get('type')) {
-        case ChildType.IMAGE:
-          this.imgChildren = this.createImageChild(childMap);
-          break;
-        case ChildType.TEXT:
-          this.textChildren = this.createTextChild(childMap)
-          break;
-      }
-    });
+    this.imgChildrens = []
+    this.textChildrens = []
+    try {
+      childsMap.forEach((childMap: Map<string, Any>) => {
+        // 使用 switch 语句代替 if-else，结构更清晰
+        switch (childMap.get('type')) {
+          case ChildType.IMAGE:
+            this.imgChildrens?.push(this.createImageChild(childMap));
+            break;
+          case ChildType.TEXT:
+            this.textChildrens?.push(this.createTextChild(childMap));
+            break;
+        }
+      });
+    } catch (error) {
+    }
   }
 
   // 提取创建子组件的逻辑到单独的方法

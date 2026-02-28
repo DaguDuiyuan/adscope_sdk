@@ -1,7 +1,8 @@
 import PlatformView, { Params } from '@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformView';
 import { AMPSSplashComponent } from './AMPSSplashComponent';
 import { SPLASH_BOTTOM } from '../common/common';
-import { SplashBottomModule } from '../splash/SplashBottomModule';
+import { SplashBottomImageChild, SplashBottomModule, SplashBottomTextChild } from '../splash/SplashBottomModule';
+import { AMPSSplashManager } from './AMPSSplashManager';
 
 //底部自定义组件全局WrappedBuilder
 export let globalSplashBottomBuilder: WrappedBuilder<[]> | undefined  = wrapBuilder(MyBuilder);
@@ -27,19 +28,23 @@ export class OhosPlatformSplashView extends PlatformView {
 export function MyBuilder() {
   if (OhosPlatformSplashView.splashBottomModule?.initialized) {
     Stack() {
-      Image($rawfile(`flutter_assets/${OhosPlatformSplashView.splashBottomModule?.imgChildren?.imagePath}`))
-        .width(OhosPlatformSplashView.splashBottomModule?.imgChildren?.width)
-        .height(OhosPlatformSplashView.splashBottomModule?.imgChildren?.height)
-        .offset({
-          x: OhosPlatformSplashView.splashBottomModule?.imgChildren?.x,
-          y: OhosPlatformSplashView.splashBottomModule?.imgChildren?.y
-        })
-      Text(OhosPlatformSplashView.splashBottomModule?.textChildren?.text)
-        .fontColor(OhosPlatformSplashView.splashBottomModule?.textChildren?.color)
-        .offset({
-          x: OhosPlatformSplashView.splashBottomModule?.textChildren?.x,
-          y: OhosPlatformSplashView.splashBottomModule?.textChildren?.y
-        })
+      ForEach(AMPSSplashManager.splashBottomModule?.textChildrens ?? [], (item: SplashBottomTextChild) => {
+        Text(item?.text)
+          .fontColor(item?.color)
+          .offset({
+            x: item?.x,
+            y: item?.y
+          })
+      })
+      ForEach(AMPSSplashManager.splashBottomModule?.imgChildrens ?? [], (imgItem: SplashBottomImageChild) => {
+        Image($rawfile(`flutter_assets/${imgItem.imagePath}`))
+          .width(imgItem?.width)
+          .height(imgItem?.height)
+          .offset({
+            x: imgItem?.x,
+            y: imgItem?.y
+          })
+      })
     }
     .backgroundColor(OhosPlatformSplashView.splashBottomModule?.backgroundColor)
     .height(OhosPlatformSplashView.splashBottomModule?.height)

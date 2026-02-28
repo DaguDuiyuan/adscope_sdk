@@ -6,7 +6,7 @@ import {
 import { AMPSEventManager } from '../common/AMPSEventManager';
 import { ampsAd, AMPSSplashAd } from 'xyz.adscope.amps';
 import { AdOptionsModule } from '../common/AdOptionsModule';
-import { SplashBottomModule } from '../splash/SplashBottomModule';
+import { SplashBottomImageChild, SplashBottomModule, SplashBottomTextChild } from '../splash/SplashBottomModule';
 import { window } from '@kit.ArkUI';
 
 export let globalSplashBottomBuilder: WrappedBuilder<[]> | undefined  = wrapBuilder(SplashBottomBuilder);
@@ -159,19 +159,23 @@ export class AMPSSplashManager {
 export function SplashBottomBuilder() {
   if (AMPSSplashManager.splashBottomModule?.initialized) {
     Stack() {
-      Image($rawfile(`flutter_assets/${AMPSSplashManager.splashBottomModule?.imgChildren?.imagePath}`))
-        .width(AMPSSplashManager.splashBottomModule?.imgChildren?.width)
-        .height(AMPSSplashManager.splashBottomModule?.imgChildren?.height)
-        .offset({
-          x: AMPSSplashManager.splashBottomModule?.imgChildren?.x,
-          y: AMPSSplashManager.splashBottomModule?.imgChildren?.y
-        })
-      Text(AMPSSplashManager.splashBottomModule?.textChildren?.text)
-        .fontColor(AMPSSplashManager.splashBottomModule?.textChildren?.color)
-        .offset({
-          x: AMPSSplashManager.splashBottomModule?.textChildren?.x,
-          y: AMPSSplashManager.splashBottomModule?.textChildren?.y
-        })
+      ForEach(AMPSSplashManager.splashBottomModule?.textChildrens ?? [], (item: SplashBottomTextChild) => {
+        Text(item?.text)
+          .fontColor(item?.color)
+          .offset({
+            x: item?.x,
+            y: item?.y
+          })
+      })
+      ForEach(AMPSSplashManager.splashBottomModule?.imgChildrens ?? [], (imgItem: SplashBottomImageChild) => {
+        Image($rawfile(`flutter_assets/${imgItem.imagePath}`))
+          .width(imgItem?.width)
+          .height(imgItem?.height)
+          .offset({
+            x: imgItem?.x,
+            y: imgItem?.y
+          })
+      })
     }
     .backgroundColor(AMPSSplashManager.splashBottomModule?.backgroundColor)
     .height(AMPSSplashManager.splashBottomModule?.height)
