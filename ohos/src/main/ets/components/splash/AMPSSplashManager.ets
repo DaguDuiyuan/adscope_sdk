@@ -166,6 +166,7 @@ export function SplashBottomBuilder() {
       ForEach(AMPSSplashManager.splashBottomModule?.textChildrens ?? [], (item: SplashBottomTextChild) => {
         Text(item?.text)
           .fontColor(item?.color)
+          .fontSize(item?.fontSize)
           .offset({
             x: item?.x,
             y: item?.y
