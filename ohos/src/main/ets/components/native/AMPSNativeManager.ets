@@ -20,6 +20,7 @@ import { AdWrapperManager } from '../native/AdWrapperManager';
 import { AMPSEventManager } from '../common/AMPSEventManager';
 import { thirdPaymentService } from '@kit.PaymentKit';
 
+//原生广告管理类
 export class AMPSNativeManager {
   private static instance: AMPSNativeManager;
   // 使用private修饰符限制访问，并添加明确类型
