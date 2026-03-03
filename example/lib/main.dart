@@ -1,13 +1,11 @@
 import 'package:adscope_sdk/amps_sdk_export.dart';
 import 'package:adscope_sdk_example/reward_video_page.dart';
-import 'package:adscope_sdk_example/splash_widget_page.dart';
 import 'package:adscope_sdk_example/union_download_app_info_page.dart';
 import 'package:flutter/material.dart';
 import 'banner_widget_page.dart';
 import 'data/common.dart';
 import 'data/init_data.dart';
 import 'draw_page.dart';
-import 'interstitial_page.dart';
 import 'interstitial_show_page.dart';
 import 'native_page.dart';
 import 'native_unified_page.dart';
@@ -27,6 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorObservers: [AMPSAdSDK.routeObserver],
       debugShowCheckedModeBanner: false,
       initialRoute: 'SplashPage',
       // 使用变量管理路由，避免硬编码字符串

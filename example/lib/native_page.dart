@@ -1,7 +1,7 @@
-import 'dart:io';
 
 import 'package:adscope_sdk/amps_sdk_export.dart';
 import 'package:adscope_sdk_example/data/common.dart';
+import 'package:adscope_sdk_example/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
 
 class NativePage extends StatefulWidget {
@@ -73,7 +73,7 @@ class _SplashPageState extends State<NativePage> {
     // }
     AdOptions options = AdOptions(
         spaceId: nativeSpaceId,
-        adCount: 2
+        adCount: 1
         //expressSize: [expressWidth, expressHeight]
     );
     _nativeAd = AMPSNativeAd(
@@ -112,6 +112,9 @@ class _SplashPageState extends State<NativePage> {
             return Center(
               child:Column(
                 children: [
+                  ButtonWidget(
+                      buttonText: "跳转",
+                      callBack: () => Navigator.pushNamed(context, "InterstitialShowPage")),
                   const Divider(height: 5, color: Colors.white),
                   Container(
                     height: 128,

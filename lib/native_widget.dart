@@ -31,7 +31,7 @@ class NativeWidget extends StatefulWidget {
 }
 
 class _NativeWidgetState extends State<NativeWidget>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, RouteAware{
   /// 创建参数
   late Map<String, dynamic> creationParams;
 
@@ -39,6 +39,7 @@ class _NativeWidgetState extends State<NativeWidget>
   double width = 0, height = 0;
   bool widgetNeedClose = false;
   bool _initialized = false;
+  bool showAd = true;
   int showCount = 1;
   @override
   void initState() {
@@ -114,9 +115,32 @@ class _NativeWidgetState extends State<NativeWidget>
     /// 有宽高信息了（渲染成功了）设置对应宽高
     return SizedBox.fromSize(
       size: Size(width, height),
-      child: view,
+      child: Visibility(visible: showAd,child: view),
     );
   }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // 订阅观察器
+    AMPSAdSDK.routeObserver.subscribe(this, ModalRoute.of(context)!);
+  }
+
+  @override
+  void dispose() {
+    AMPSAdSDK.routeObserver.unsubscribe(this); // 记得取消订阅
+    super.dispose();
+  }
+
+  @override
+  void didPushNext() => setState(() {
+    showAd = false;
+  });
+
+  @override
+  void didPopNext() => setState(() {
+    showAd = true;
+  });
 
   @override
   bool get wantKeepAlive => true;
