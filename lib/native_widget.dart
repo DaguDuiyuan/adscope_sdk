@@ -39,7 +39,7 @@ class _NativeWidgetState extends State<NativeWidget>
   double width = 0, height = 0;
   bool widgetNeedClose = false;
   bool _initialized = false;
-
+  int showCount = 1;
   @override
   void initState() {
     super.initState();
@@ -52,7 +52,12 @@ class _NativeWidgetState extends State<NativeWidget>
     widget.adNative?.setInteractiveListener(widget.adId, widget.mInteractiveCallBack);
     widget.adNative?.setNegativeFeedbackListener(widget.adId, widget.mNegativeFeedbackListener);
     widget.adNative?.setVideoPlayerListener(widget.adId, widget.mVideoPlayerCallBack);
-
+    Future.delayed(const Duration(milliseconds: 1000) ,(){
+      if (!mounted) return;
+      setState(() {
+        showCount++;
+      });
+    });
   }
 
   @override
@@ -88,11 +93,19 @@ class _NativeWidgetState extends State<NativeWidget>
           creationParamsCodec: const StandardMessageCodec());
     }
     else if (Platform.isOhos) {
-      view =  OhosView(
-          viewType: AMPSPlatformViewRegistry.ampsSdkNativeViewId,
-          onPlatformViewCreated: _onPlatformViewCreated,
-          creationParams: creationParams,
-          creationParamsCodec: const StandardMessageCodec());
+      if(showCount> 0) {
+        view = OhosView(
+            viewType: AMPSPlatformViewRegistry.ampsSdkNativeViewId,
+            onPlatformViewCreated: _onPlatformViewCreated,
+            creationParams: creationParams,
+            creationParamsCodec: const StandardMessageCodec());
+      }else{
+        view = OhosView(
+            viewType: AMPSPlatformViewRegistry.ampsSdkNativeViewId,
+            onPlatformViewCreated: _onPlatformViewCreated,
+            creationParams: creationParams,
+            creationParamsCodec: const StandardMessageCodec());
+      }
     }
     else {
       view = const Center(child: Text("暂不支持此平台"));

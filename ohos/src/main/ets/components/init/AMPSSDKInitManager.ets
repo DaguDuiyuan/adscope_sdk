@@ -70,6 +70,7 @@ export class AMPSSDKInitManager {
     }
     if (ampsInitConfig) {
       AMPSAdSdk.testMode = false
+      AMPSSDKInitManager.initStatus = 1
       AMPSAdSdk.init(ampsInitConfig, callback)
     }
   }

@@ -26,15 +26,14 @@ export struct AMPSNativeAdComponent {
       }.onAreaChange((oldValue, size) => {
 
         if (size.width && size.width > 10 && size.height && size.height > 10) {
-          if (oldValue.height as number == (size.height as number)) {
-            return
+          if (Math.floor(oldValue.height as number) < Math.floor(size.height as number)) {
+            let map: Map<string, Any> = new Map()
+            map.set("adId", this.adId)
+            map.set("width", size.width as number)
+            map.set("height", size.height as number)
+            //console.log("nativeSizeUpdate-111-old:" + oldValue.height + ",h:" + size.height)
+            AMPSEventManager.getInstance().sendMessageToFlutter(AMPSNativeCallBackChannelMethod.nativeSizeUpdate, map)
           }
-          let map: Map<string, Any> = new Map()
-          map.set("adId",this.adId)
-          map.set("width", size.width as number)
-          map.set("height", size.height as number)
-          console.log("nativeSizeUpdate-w:" + size.width + "h:" + size.height)
-          AMPSEventManager.getInstance().sendMessageToFlutter(AMPSNativeCallBackChannelMethod.nativeSizeUpdate, map)
         }
       })
       // .backgroundColor(Color.Green)
