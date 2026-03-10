@@ -48,7 +48,12 @@ class AMPSAdSDK {
       flag,
     );
   }
-
+  static Future<int> getPermissionTracking() async {
+    final res = await AdscopeSdk.invokeMethod(
+      AMPSAdSdkMethodNames.permissionTracking
+    );
+    return res;
+  }
   ///获取SDK版本
   static Future<String> getSdkVersion() async {
     final sdkVersion = await AdscopeSdk.invokeMethod(

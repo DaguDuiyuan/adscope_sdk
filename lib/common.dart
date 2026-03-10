@@ -149,6 +149,7 @@ class AMPSAdSdkMethodNames {
   static const String setLogLevel = "AMPSAdSdk_setLogLevel";
   /// 初始化AMPS广告SDK的方法名
   static const String init = 'AMPSAdSdk_init';
+  static const String permissionTracking = 'AMPSAdSdk_permissionTracking';
   static const String getSdkVersion= "AMPSAdSdk_getSdkVersion";
   static const String getInitStatus= "AMPSAdSdk_getInitStatus";
   static const String setPersonalRecommend = "AMPSAdSdk_setPersonalRecommend";
