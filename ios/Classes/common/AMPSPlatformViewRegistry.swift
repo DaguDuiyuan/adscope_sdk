@@ -25,6 +25,8 @@ class AMPSPlatformViewRegistry {
         
         binding.register(AMPSDrawViewFactory(), withId: AMPSPlatformViewIds.drawViewId)
         
+        binding.register(AMPSplashViewFactory(), withId: AMPSPlatformViewIds.splashViewId)
+        
     }
     
     
