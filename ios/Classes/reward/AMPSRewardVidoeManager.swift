@@ -119,5 +119,8 @@ extension AMPSRewardVideoManager : AMPSRewardedVideoAdDelegate {
     func ampsRewardedVideoAdDidRewardEffective(_ rewardVideoAd: AMPSRewardedVideoAd) {
         sendMessage(AMPSRewardedVideoCallBackChannelMethod.onAdReward)
     }
+    func ampsRewardedVideoAdServerRewardDidFail(_ rewardedVideoAd: AMPSRewardedVideoAd, error: any Error) {
+        sendMessage(AMPSRewardedVideoCallBackChannelMethod.onServerRewardDidFail, ["code":  (error as NSError).code,"message":(error as NSError).localizedDescription])
+    }
     
 }

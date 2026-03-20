@@ -60,6 +60,12 @@ class AMPSRewardVideoAd {
           case AMPSRewardedVideoCallBackChannelMethod.onAdCached:
             adCallBack?.onAdCached?.call();
             break;
+          case AMPSRewardedVideoCallBackChannelMethod.onServerRewardDidFail:
+            var map = call.arguments as Map<dynamic, dynamic>;
+            adCallBack?.onServerRewardFailed?.call(
+                map[AMPSSdkCallBackErrorKey.code],
+                map[AMPSSdkCallBackErrorKey.message]);
+            break;
         }
       },
     );

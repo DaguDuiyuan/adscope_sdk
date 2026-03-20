@@ -1,4 +1,4 @@
-import 'dart:io';
+
 
 import 'package:adscope_sdk/amps_sdk_export.dart';
 import 'package:adscope_sdk_example/data/common.dart';
@@ -52,6 +52,8 @@ class _RewardVideoPageState extends State<RewardVideoPage> {
       debugPrint("ad load onVideoPlayEnd");
     }, onVideoSkipToEnd: (duration) {
       debugPrint("ad load onVideoSkipToEnd=$duration");
+    },onServerRewardFailed: (code, msg) {
+      debugPrint("ad load onServerRewardFailed = $code;$msg");
     });
 
 

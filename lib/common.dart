@@ -73,6 +73,7 @@ class AMPSRewardedVideoCallBackChannelMethod {
   static const String onVideoPlayError = "RewardedVideo_onVideoPlayError";
   static const String onVideoSkipToEnd = "RewardedVideo_onVideoSkipToEnd";
   static const String onAdCached = "RewardedVideo_onAdCached";
+  static const String onServerRewardDidFail = "RewardedVideo_ServerRewardDidFail";
 }
 
 //2. banner相关原生端回调

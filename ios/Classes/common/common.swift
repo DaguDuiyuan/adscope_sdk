@@ -98,6 +98,7 @@ class AMPSRewardedVideoCallBackChannelMethod {
   static let onVideoPlayError = "RewardedVideo_onVideoPlayError";
   static let onVideoSkipToEnd = "RewardedVideo_onVideoSkipToEnd";
   static let onAdCached = "RewardedVideo_onAdCached";
+  static let onServerRewardDidFail = "RewardedVideo_ServerRewardDidFail"
 }
 //2. banner相关原生端回调
 class AMPSBannerCallBackChannelMethod {
