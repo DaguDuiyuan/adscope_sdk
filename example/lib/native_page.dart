@@ -1,4 +1,4 @@
-import 'dart:io';
+
 
 import 'package:adscope_sdk/amps_sdk_export.dart';
 import 'package:adscope_sdk_example/data/common.dart';
@@ -32,9 +32,10 @@ class _SplashPageState extends State<NativePage> {
     setState(() {});
     _adCallBack = AMPSNativeAdListener(
         loadOk: (adIds) {
+          debugPrint("广告加载成功=${adIds.length}");
         },
         loadFail: (code, message) => {
-
+          debugPrint("广告加载失败=$message")
         });
 
     _renderCallBack = AMPSNativeRenderListener(renderSuccess: (adId) {
