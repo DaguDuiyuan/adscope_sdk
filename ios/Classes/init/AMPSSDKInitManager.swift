@@ -57,8 +57,14 @@ class AMPSSDKInitManager {
         if let idfa = initParam?.adController?.OAID{
             config.customIDFA = idfa
         }
-        if let sensor = initParam?.adController?.isCanUseSensor,sensor == false{
+        if let sensor = initParam?.adController?.isCanUseShakeAd,sensor == false{
             config.closeShakeAd = true
+        }
+        if let jsonOption = initParam?.optionInfo {
+            config.optionalInfo = jsonOption
+        }
+        if let extensionParam: [String: Any] = flutterParams["extensionParam"] as? [String: Any] {
+            config.customExtraDict = extensionParam
         }
 
         AMPSAdSDKManager.sharedInstance().startAsync(withAppId: appid) { status in
