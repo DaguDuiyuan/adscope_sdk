@@ -80,7 +80,8 @@ struct AMPSIOSAdControllerModel:Codable {
     let isCanGatherOAID : Bool?
     let getUnderageTag : Int?
     let userAgent : String?
-    let isCanUseSensor: Bool?
+//    let isCanUseSensor: Bool?
+    let isCanUseShakeAd: Bool?
     let isLocationEnabled: Bool?
     let isCanUseAndroidID : Bool?
     let location : AMPSIOSLocationModel?
@@ -119,6 +120,6 @@ struct AMPSIOSInitModel:Codable {
     let currency: String?
     let _isDebugSetting: Bool?
     let appName: String?
-//    let optionalInfor: [String:Any]?
+    let optionInfo: String?
 }
 
