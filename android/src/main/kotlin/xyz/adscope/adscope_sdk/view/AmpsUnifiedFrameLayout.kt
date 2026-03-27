@@ -15,6 +15,9 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.graphics.toColorInt
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import jp.wasabeef.glide.transformations.BlurTransformation
 import xyz.adscope.adscope_sdk.data.AD_ID
 import xyz.adscope.adscope_sdk.data.AMPSNativeCallBackChannelMethod
 import xyz.adscope.adscope_sdk.data.ErrorModel
@@ -182,13 +185,40 @@ class AmpsUnifiedFrameLayout(context: Context) : FrameLayout(context) {
             unifiedItem.mainImageViews?.firstOrNull()?.view
         } else {
             unifiedItem.mainImageUrl?.let { imageUrl ->
-                AppCompatImageView(context).apply {
+                val container = FrameLayout(context).apply {
                     layoutParams = createLayoutParams(child.width, child.height, child.x, child.y)
-                    scaleType = ImageView.ScaleType.FIT_XY//目前用户设置多大就多大。
-                    ImageLoader().loadImage(this, imageUrl)
-                    // 为我们自己创建的视图设置点击监听
-                    setupClickListener(this, child.clickType, child.clickIdType)
                 }
+
+                // 背景 ImageView
+                val backgroundView = AppCompatImageView(context).apply {
+                    scaleType = ImageView.ScaleType.FIT_XY
+                    layoutParams = LayoutParams(
+                        LayoutParams.MATCH_PARENT,
+                        LayoutParams.MATCH_PARENT
+                    )
+                    Glide.with(context)
+                        .load(imageUrl)
+                        .apply(RequestOptions.bitmapTransform(BlurTransformation(25, 8)))
+                        .into(this)
+                }
+                container.addView(backgroundView)
+
+                // 主图 ImageView（居中显示）
+                val mainView = AppCompatImageView(context).apply {
+                    layoutParams = LayoutParams(
+                        LayoutParams.MATCH_PARENT,
+                        LayoutParams.MATCH_PARENT
+                    )
+                    scaleType = ImageView.ScaleType.FIT_CENTER
+                    Glide.with(context)
+                        .load(imageUrl)
+                        .fitCenter()
+                        .error(android.R.drawable.stat_notify_error)
+                        .into(this)
+                }
+                container.addView(mainView)
+                setupClickListener(this, child.clickType, child.clickIdType)
+                container
             }
         }
 
@@ -201,6 +231,85 @@ class AmpsUnifiedFrameLayout(context: Context) : FrameLayout(context) {
                 }
             }
         }
+
+//        val view =  else {
+//            unifiedItem.mainImageUrl?.let { imageUrl ->
+//                AppCompatImageView(context).apply {
+//                    layoutParams = createLayoutParams(child.width, child.height, child.x, child.y)
+//                    scaleType = ImageView.ScaleType.FIT_XY//目前用户设置多大就多大。
+//                    ImageLoader().loadImage(this, imageUrl)
+//                    // 为我们自己创建的视图设置点击监听
+//                    setupClickListener(this, child.clickType, child.clickIdType)
+//                }
+//            }
+//        }
+//
+//        return view?.apply {
+//            layoutParams = createLayoutParams(child.width, child.height, child.x, child.y)
+//            child.backgroundColor?.let { bgColor ->
+//                try {
+//                    setBackgroundColor(bgColor.toColorInt())
+//                } catch (_: IllegalArgumentException) { /* 忽略错误 */
+//                }
+//            }
+//        }
+//        if (unifiedItem.isViewObject) {
+//            return unifiedItem.mainImageViews?.firstOrNull()?.view?.apply {
+//                layoutParams = createLayoutParams(child.width, child.height, child.x, child.y)
+//                child.backgroundColor?.let { bgColor ->
+//                    try {
+//                        setBackgroundColor(bgColor.toColorInt())
+//                    } catch (_: IllegalArgumentException) { /* ignore */
+//                    }
+//                }
+//            }
+//        }
+//
+//        unifiedItem.mainImageUrl?.let { imageUrl ->
+//            val container = FrameLayout(context).apply {
+//                layoutParams = createLayoutParams(child.width, child.height, child.x, child.y)
+//                child.backgroundColor?.let { bgColor ->
+//                    try {
+//                        setBackgroundColor(bgColor.toColorInt())
+//                    } catch (_: IllegalArgumentException) { /* ignore */
+//                    }
+//                }
+//            }
+//
+//            // 背景 ImageView
+//            val backgroundView = AppCompatImageView(context).apply {
+//                scaleType = ImageView.ScaleType.FIT_XY // 拉伸铺满
+//                layoutParams = LayoutParams(
+//                    LayoutParams.MATCH_PARENT,
+//                    LayoutParams.MATCH_PARENT
+//                )
+//                Glide.with(context)
+//                    .load(imageUrl)
+//                    .apply(RequestOptions.bitmapTransform(BlurTransformation(25, 8)))
+//                    .into(this)
+//                setupClickListener(this, child.clickType, child.clickIdType)
+//            }
+//            container.addView(backgroundView)
+//
+//            // 主图 ImageView（居中显示）
+//            val mainView = AppCompatImageView(context).apply {
+//                layoutParams = LayoutParams(
+//                    LayoutParams.MATCH_PARENT,
+//                    LayoutParams.MATCH_PARENT
+//                )
+//                scaleType = ImageView.ScaleType.FIT_CENTER
+//                Glide.with(context)
+//                    .load(imageUrl)
+//                    .fitCenter()
+//                    .error(android.R.drawable.stat_notify_error)
+//                    .into(this)
+//                setupClickListener(this, child.clickType, child.clickIdType)
+//            }
+//            container.addView(mainView)
+//            return container
+//        }
+//
+//        return null
     }
 
 
@@ -253,7 +362,11 @@ class AmpsUnifiedFrameLayout(context: Context) : FrameLayout(context) {
                 override fun onVideoError(p0: AMPSUnifiedNativeAdError?) {
                     sendMessageToFlutter(
                         AMPSNativeCallBackChannelMethod.ON_VIDEO_PLAY_ERROR,
-                        mapOf(AD_ID to adId, ErrorModel.CODE to p0?.code, ErrorModel.MESSAGE to p0?.msg)
+                        mapOf(
+                            AD_ID to adId,
+                            ErrorModel.CODE to p0?.code,
+                            ErrorModel.MESSAGE to p0?.msg
+                        )
                     )
                 }
 
@@ -284,7 +397,7 @@ class AmpsUnifiedFrameLayout(context: Context) : FrameLayout(context) {
                 } catch (_: Exception) {
                 }
             }
-            fontTextEllipsize(child.maxLines,child.ellipsize)
+            fontTextEllipsize(child.maxLines, child.ellipsize)
             setupClickListener(this, child.clickType, child.clickIdType)
         }
     }
@@ -301,7 +414,7 @@ class AmpsUnifiedFrameLayout(context: Context) : FrameLayout(context) {
                 } catch (_: Exception) {
                 }
             }
-            fontTextEllipsize(child.maxLines,child.ellipsize)
+            fontTextEllipsize(child.maxLines, child.ellipsize)
             setupClickListener(this, child.clickType, child.clickIdType)
         }
     }
@@ -487,7 +600,7 @@ class AmpsUnifiedFrameLayout(context: Context) : FrameLayout(context) {
     }
 }
 
-private fun AppCompatTextView.fontTextEllipsize(mMaxLines: Int?,mEllipsize: Int?) {
+private fun AppCompatTextView.fontTextEllipsize(mMaxLines: Int?, mEllipsize: Int?) {
     mMaxLines?.let {
         if (it > 0) {
             maxLines = it

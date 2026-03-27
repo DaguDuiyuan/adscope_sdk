@@ -5,10 +5,9 @@
 //  Created by duzhaoquan on 2025/10/29.
 //
 
-import Foundation
-import Flutter
 import AMPSAdSDK
-
+import Flutter
+import Foundation
 
 class AMPSUnifiedNAtiveViewFactory: NSObject, FlutterPlatformViewFactory {
     func create(withFrame frame: CGRect, viewIdentifier viewId: Int64, arguments args: Any?) -> any FlutterPlatformView {
@@ -18,48 +17,44 @@ class AMPSUnifiedNAtiveViewFactory: NSObject, FlutterPlatformViewFactory {
     func createArgsCodec() -> any FlutterMessageCodec & NSObjectProtocol {
         return FlutterStandardMessageCodec.sharedInstance()
     }
-    
-    
 }
       
-class AMPSSelfRenderView : NSObject, FlutterPlatformView {
-    
+class AMPSSelfRenderView: NSObject, FlutterPlatformView {
     private var iosView: UIView
-    init(frame: CGRect,viewId: Int64,args:Any?) {
+    init(frame: CGRect, viewId: Int64, args: Any?) {
         self.iosView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 300))
         super.init()
 //        self.iosView.backgroundColor = UIColor.orange
         
-        if let param = args as? [String: Any?]{
-            let model: FlutterUnifiedParam? = Tools.convertToModel(from: param as [String : Any])
+        if let param = args as? [String: Any?] {
+            let model: FlutterUnifiedParam? = Tools.convertToModel(from: param as [String: Any])
             if let adId = model?.adId {
-               if let adView = AMPSNativeManager.shared.getUnifiedNativeView(adId) {
-                   if adView.nativeAd.nativeMode == .nativeExpress {
-                       self.iosView.addSubview(adView)
-                       return
-                   }
+                if let adView = AMPSNativeManager.shared.getUnifiedNativeView(adId) {
+                    if adView.nativeAd.nativeMode == .nativeExpress {
+                        self.iosView.addSubview(adView)
+                        return
+                    }
                    
 //                   self.iosView.frame.size.width = UIScreen.main.bounds.width
 //                   self.iosView.frame.size.height = model?.unifiedWidget?.height ?? 200
 //                   let x =  (UIScreen.main.bounds.width - (model?.unifiedWidget?.width ?? 0))/2
-                   adView.frame  =  CGRect(x:0, y: 0, width: model?.unifiedWidget?.width ?? UIScreen.main.bounds.width, height: model?.unifiedWidget?.height ?? self.iosView.frame.size.height)
-                   if let bgColor = model?.unifiedWidget?.backgroundColor {
-                       adView.backgroundColor = UIColor(hexString: bgColor)
-                   }
+                    adView.frame = CGRect(x: 0, y: 0, width: model?.unifiedWidget?.width ?? UIScreen.main.bounds.width, height: model?.unifiedWidget?.height ?? self.iosView.frame.size.height)
+                    if let bgColor = model?.unifiedWidget?.backgroundColor {
+                        adView.backgroundColor = UIColor(hexString: bgColor)
+                    }
 //                   adView.backgroundColor = UIColor.blue
-                   self.iosView.addSubview(adView)
-                   self.layoutItems(adView,model!)
-               }
-           }
+                    self.iosView.addSubview(adView)
+                    self.layoutItems(adView, model!)
+                }
+            }
         }
     }
+
     func view() -> UIView {
-        return iosView
+        return self.iosView
     }
     
-    
-    func layoutItems(_ adView: AMPSUnifiedNativeView, _ model: FlutterUnifiedParam){
-                
+    func layoutItems(_ adView: AMPSUnifiedNativeView, _ model: FlutterUnifiedParam) {
         var clickViews: [UIView] = []
         let ad = adView.nativeAd
         
@@ -67,11 +62,12 @@ class AMPSSelfRenderView : NSObject, FlutterPlatformView {
             adView.mediaView?.delegate = AMPSNativeManager.shared.unifiedManager
             if let videoModel = model.unifiedWidget?.children?.first(where: { child in
                 child.type == .video
-            }){
-                adView.mediaView?.resetLayout(with: CGRect(x: videoModel.x ?? 0, y: videoModel.y ?? 0, width:  videoModel.width ?? adView.frame.width, height: videoModel.height ?? 150))
+            }) {
+                adView.mediaView?.resetLayout(with: CGRect(x: videoModel.x ?? 0, y: videoModel.y ?? 0, width: videoModel.width ?? adView.frame.width, height: videoModel.height ?? 150))
             }
         } else if ad.imageUrls.count > 1 {
-            for i in 0..<ad.imageUrls.count {
+            // 轮播
+            for i in 0 ..< ad.imageUrls.count {
                 let width = (adView.frame.width - 10 * CGFloat(ad.imageUrls.count - 1)) / CGFloat(ad.imageUrls.count)
                 let imgView = UIImageView(frame: CGRect(
                     x: 10 + CGFloat(i) * width,
@@ -86,35 +82,86 @@ class AMPSSelfRenderView : NSObject, FlutterPlatformView {
                             imgView?.image = UIImage(data: data)
                         }
                     }
-                   
-                }
+                 }
                 adView.addSubview(imgView)
                 clickViews.append(imgView)
             }
         } else if !ad.imageUrl.isEmpty {
+            // 单图
             let imageUrl = ad.imageUrl
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: adView.frame.size.width, height: 150))
-            if let imgModel = model.unifiedWidget?.children?.first(where: { child in
-                child.type == .mainImage
-            }){
-                imageView.frame = CGRect(x: imgModel.x ?? 0, y: imgModel.y ?? 0, width: imgModel.width ??  adView.frame.size.width, height: imgModel.height ?? adView.frame.size.height)
-                if let bgColor = imgModel.backgroundColor{
-                    imageView.backgroundColor = UIColor(hexString: bgColor)
-                }
-                
+            let imgModel = model.unifiedWidget?.children?.first { $0.type == .mainImage }
+            
+            let imageViewFrame: CGRect
+            if let model = imgModel {
+                let x = model.x ?? 0
+                let y = model.y ?? 0
+                let width = model.width ?? adView.frame.size.width
+                let height = model.height ?? adView.frame.size.height
+                imageViewFrame = CGRect(x: x, y: y, width: width, height: height)
+            } else {
+                imageViewFrame = CGRect(x: 0, y: 0, width: adView.frame.size.width, height: 150)
             }
-            imageView.contentMode = .scaleAspectFit
+            
+            // 模糊底图
+            let backgroundImageView = UIImageView(frame: imageViewFrame)
+            backgroundImageView.clipsToBounds = true
+            
             if let _ = URL(string: imageUrl) {
-                Tools.fetchImageData(from: imageUrl) { [weak imageView] result in
-                    if case let .success(data) = result {
-                        imageView?.image = UIImage(data: data)
+                Tools.fetchImageData(from: imageUrl) { [weak backgroundImageView] result in
+                    if case let .success(data) = result,
+                       let image = UIImage(data: data)
+                    {
+                        // 应用高斯模糊
+                        let blurredImage = image.applyGaussianBlur(radius: 25)
+                        backgroundImageView?.image = blurredImage
                     }
                 }
             }
+            if let bgColor = imgModel?.backgroundColor {
+                backgroundImageView.backgroundColor = UIColor(hexString: bgColor)
+            }
             
-            adView.addSubview(imageView)
-            clickViews.append(imageView)
-                             
+            adView.addSubview(backgroundImageView)
+            clickViews.append(backgroundImageView)
+            
+            // 主图
+            let mainImageView = UIImageView(frame: imageViewFrame)
+            mainImageView.clipsToBounds = true
+            
+            if let _ = URL(string: imageUrl) {
+                Tools.fetchImageData(from: imageUrl) { [weak mainImageView] result in
+                    if case let .success(data) = result {
+                        mainImageView?.image = UIImage(data: data)
+                    }
+                }
+            }
+            mainImageView.contentMode = .scaleAspectFit
+            adView.addSubview(mainImageView)
+            clickViews.append(mainImageView)
+            
+            //            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: adView.frame.size.width, height: 150))
+            
+//            if let imgModel = model.unifiedWidget?.children?.first(where: { child in
+//                child.type == .mainImage
+//            }){
+//                imageView.frame = CGRect(x: imgModel.x ?? 0, y: imgModel.y ?? 0, width: imgModel.width ??  adView.frame.size.width, height: imgModel.height ?? adView.frame.size.height)
+//                if let bgColor = imgModel.backgroundColor{
+//                    imageView.backgroundColor = UIColor(hexString: bgColor)
+//                }
+//
+//            }
+//            imageView.contentMode = .scaleAspectFit
+//            if let _ = URL(string: imageUrl) {
+//                Tools.fetchImageData(from: imageUrl) { [weak imageView] result in
+//                    if case let .success(data) = result {
+//                        imageView?.image = UIImage(data: data)
+//                    }
+//                }
+//            }
+//
+//            adView.addSubview(imageView)
+//            clickViews.append(imageView)
+//
         }
 
         // 设置广告Logo
@@ -122,8 +169,8 @@ class AMPSSelfRenderView : NSObject, FlutterPlatformView {
         adLogoImageView.contentMode = .scaleAspectFit
         if !ad.adLogoUrl.isEmpty, let imgModel = model.unifiedWidget?.children?.first(where: { child in
             child.type == .adSourceLogo
-        }){
-           adLogoImageView.frame = CGRect(x: imgModel.x ?? adView.frame.width - 50, y: imgModel.y ?? adView.frame.width - 20, width: imgModel.width ?? 36, height: imgModel.height ?? 14)
+        }) {
+            adLogoImageView.frame = CGRect(x: imgModel.x ?? adView.frame.width - 50, y: imgModel.y ?? adView.frame.width - 20, width: imgModel.width ?? 36, height: imgModel.height ?? 14)
             let adLogoUrl = ad.adLogoUrl
             if URL(string: adLogoUrl) != nil {
                 Tools.fetchImageData(from: adLogoUrl) { [weak adLogoImageView] result in
@@ -139,8 +186,8 @@ class AMPSSelfRenderView : NSObject, FlutterPlatformView {
         // 创建图标iconImageView
         if let imgModel = model.unifiedWidget?.children?.first(where: { child in
             child.type == .appIcon
-        }){
-            if  !ad.iconUrl.isEmpty {
+        }) {
+            if !ad.iconUrl.isEmpty {
                 let iconUrl = ad.iconUrl
                 iconImageView.frame = CGRectMake(
                     imgModel.x ?? 0,
@@ -163,9 +210,9 @@ class AMPSSelfRenderView : NSObject, FlutterPlatformView {
 
         // 创建标题Label
         let titleLabel = UILabel()
-        if !ad.title.isEmpty ,let imgModel = model.unifiedWidget?.children?.first(where: { child in
+        if !ad.title.isEmpty, let imgModel = model.unifiedWidget?.children?.first(where: { child in
             child.type == .mainTitle
-        }){
+        }) {
             titleLabel.text = ad.title
             titleLabel.textColor = .darkGray
             titleLabel.frame = CGRectMake(imgModel.x ?? 0, imgModel.y ?? 0, adView.frame.width - 40, imgModel.height ?? 20)
@@ -185,7 +232,7 @@ class AMPSSelfRenderView : NSObject, FlutterPlatformView {
         let descLabel = UILabel()
         if let imgModel = model.unifiedWidget?.children?.first(where: { child in
             child.type == .descText
-        }){
+        }) {
             descLabel.frame = CGRect(
                 x: iconImageView.frame.width + 10,
                 y: 0,
@@ -210,9 +257,8 @@ class AMPSSelfRenderView : NSObject, FlutterPlatformView {
             adView.addSubview(descLabel)
         }
         
-        clickViews.append(contentsOf: [iconImageView,titleLabel,descLabel])
+        clickViews.append(contentsOf: [iconImageView, titleLabel, descLabel])
         // 注册可点击视图
         adView.registerClickableViews(clickViews)
     }
-    
 }
