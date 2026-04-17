@@ -98,10 +98,22 @@ class _RewardVideoPageState extends State<RewardVideoPage> {
     }
 ****/
 
+    // String? useId = "xxxxx";
+    // const data = 'xxxxxx';
+    // Map<String, dynamic>? extraDataMap;
+    // if (Platform.isAndroid) {
+    //   const data = 'xxxxxxx';
+    //   extraDataMap = <String, String>{
+    //     "adn_amps": data,
+    //   };
+    // } 
+
     AdOptions options = AdOptions(
         spaceId: rewardVideoSpaceId,
-        //userId: useId, //根据需要传入
-        //extraDataMap: extraDataMap //根据需要传入
+        
+        // extraDataMap: extraDataMap, //根据需要传入
+        // extra: data,
+        // userId: useId, //根据需要传入
     );
     _rewardVideoAd =
         AMPSRewardVideoAd(config: options, adCallBack: _adCallBack);
