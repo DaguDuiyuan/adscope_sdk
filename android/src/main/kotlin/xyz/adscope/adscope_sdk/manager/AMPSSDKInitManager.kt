@@ -3,6 +3,7 @@ package xyz.adscope.adscope_sdk.manager
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import xyz.adscope.adscope_sdk.data.AMPSAdSdkMethodNames
 import xyz.adscope.adscope_sdk.data.AMPSInitChannelMethod
 import xyz.adscope.adscope_sdk.data.AMPSInitConfigConverter
@@ -100,8 +101,13 @@ class AMPSSDKInitManager private constructor() {
     fun initAMPSSDK(ampsInitConfig: AMPSInitConfig?, context: Context, isMediation: Boolean) {
         val callback = object : IAMPSInitCallback {
             override fun successCallback() {
-                mainThreadHandler.post {
+                val isMain = Looper.myLooper() == Looper.getMainLooper()
+                if(isMain){
                     sendMessage(AMPSInitChannelMethod.INIT_SUCCESS)
+                }else {
+                    mainThreadHandler.post {
+                        sendMessage(AMPSInitChannelMethod.INIT_SUCCESS)
+                    }
                 }
             }
 
