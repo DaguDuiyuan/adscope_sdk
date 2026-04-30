@@ -1,5 +1,6 @@
 
 
+import 'dart:io';
 import 'package:adscope_sdk/amps_sdk_export.dart';
 import 'package:adscope_sdk_example/data/common.dart';
 import 'package:adscope_sdk_example/widgets/blurred_background.dart';
@@ -97,26 +98,29 @@ class _RewardVideoPageState extends State<RewardVideoPage> {
       };
     }
 ****/
-
-    // String? useId = "xxxxx";
-    // const data = 'xxxxxx';
-    // Map<String, dynamic>? extraDataMap;
-    // if (Platform.isAndroid) {
-    //   const data = 'xxxxxxx';
-    //   extraDataMap = <String, String>{
-    //     "adn_amps": data,
-    //   };
-    // } 
-
     AdOptions options = AdOptions(
-        spaceId: rewardVideoSpaceId,
-        
-        // extraDataMap: extraDataMap, //根据需要传入
-        // extra: data,
-        // userId: useId, //根据需要传入
+      spaceId: rewardVideoSpaceId,
     );
-    _rewardVideoAd =
-        AMPSRewardVideoAd(config: options, adCallBack: _adCallBack);
+
+    String? useId = "xxxxx";
+    const data = 'xxxxxx'; //激励视频回掉参数
+    Map<String, dynamic>? extraDataMap;
+    if (Platform.isAndroid) {
+      extraDataMap = <String, String>{
+        "adn_amps": data,
+      };
+      options = AdOptions(
+        spaceId: rewardVideoSpaceId,
+        extraDataMap: extraDataMap,
+      );
+    } else if (Platform.isIOS){
+      options = AdOptions(
+        spaceId: rewardVideoSpaceId,
+        extra: data,
+        userId: useId,
+      );
+    }
+    _rewardVideoAd = AMPSRewardVideoAd(config: options, adCallBack: _adCallBack);
   }
 
   @override

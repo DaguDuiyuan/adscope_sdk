@@ -67,6 +67,7 @@ class AMPSDrawManager: NSObject {
             if let adId = arguments?["adId"] as? String {
                 if  let view = self.getAdView(adId: adId) {
                     view.removeDrawAd()
+                    self.adIdMap.removeValue(forKey: view)
                 }
             }
             result(nil)
@@ -144,6 +145,7 @@ extension AMPSDrawManager: AMPSDrawAdManagerDelegate{
 extension AMPSDrawManager: AMPSDrawAdViewDelegate{
     
     func ampsDrawAdRenderSuccess(_ drawAdView: AMPSDrawAdView) {
+        drawAdView.viewController = UIViewController.current()
         if let adID = self.adIdMap[drawAdView] {
             sendMessage(AmpsDrawCallbackChannelMethod.onRenderSuccess,adID)
         }
@@ -168,11 +170,7 @@ extension AMPSDrawManager: AMPSDrawAdViewDelegate{
     }
     
     func ampsDrawAdDidCloseOtherController(_ drawAdView: AMPSDrawAdView) {
-        drawAdView.removeDrawAd()
-        if let adID = self.adIdMap[drawAdView] {
-            sendMessage(AmpsDrawCallbackChannelMethod.onAdClosed,adID)
-        }
-        self.adIdMap.removeValue(forKey: drawAdView)
+       //这里不是广告关闭，是从广告点击后，打开了其他控制器（比如浏览器），然后从其他控制器返回到app时的回调
     }
     func ampsDrawAdDidPlayFinish(_ drawAdView: AMPSDrawAdView)  {
         if let adID = self.adIdMap[drawAdView] {
