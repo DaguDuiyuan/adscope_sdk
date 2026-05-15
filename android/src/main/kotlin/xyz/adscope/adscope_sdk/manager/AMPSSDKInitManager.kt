@@ -41,7 +41,7 @@ class AMPSSDKInitManager private constructor() {
     fun getLogLevelByCode(code: Int?): SDKLog.LOG_LEVEL? {
         if (code == null) return null
         // 遍历枚举值匹配 code
-        return SDKLog.LOG_LEVEL.entries.firstOrNull { it.value == code }
+        return SDKLog.LOG_LEVEL.values().firstOrNull { it.value == code }
     }
     @Suppress("UNCHECKED_CAST")
     fun handleMethodCall(call: MethodCall, result: Result) {
