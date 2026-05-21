@@ -3,7 +3,10 @@ package xyz.adscope.adscope_sdk.view
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Color
+import androidx.core.graphics.toColorInt
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import jp.wasabeef.glide.transformations.BlurTransformation
 import android.text.TextUtils
 import android.util.Log
 import android.util.TypedValue
@@ -182,13 +185,47 @@ class AmpsUnifiedFrameLayout(context: Context) : FrameLayout(context) {
             unifiedItem.mainImageViews?.firstOrNull()?.view
         } else {
             unifiedItem.mainImageUrl?.let { imageUrl ->
-                AppCompatImageView(context).apply {
+                val container = FrameLayout(context).apply {
                     layoutParams = createLayoutParams(child.width, child.height, child.x, child.y)
-                    scaleType = ImageView.ScaleType.FIT_XY//目前用户设置多大就多大。
-                    ImageLoader().loadImage(this, imageUrl)
-                    // 为我们自己创建的视图设置点击监听
-                    setupClickListener(this, child.clickType, child.clickIdType)
                 }
+
+                // 背景 ImageView
+                val backgroundView = AppCompatImageView(context).apply {
+                    scaleType = ImageView.ScaleType.FIT_XY
+                    layoutParams = LayoutParams(
+                        LayoutParams.MATCH_PARENT,
+                        LayoutParams.MATCH_PARENT
+                    )
+                    Glide.with(context)
+                        .load(imageUrl)
+                        .apply(RequestOptions.bitmapTransform(BlurTransformation(25, 8)))
+                        .into(this)
+                }
+                container.addView(backgroundView)
+
+                // 主图 ImageView（居中显示）
+                val mainView = AppCompatImageView(context).apply {
+                    layoutParams = LayoutParams(
+                        LayoutParams.MATCH_PARENT,
+                        LayoutParams.MATCH_PARENT
+                    )
+                    scaleType = ImageView.ScaleType.FIT_CENTER
+                    Glide.with(context)
+                        .load(imageUrl)
+                        .fitCenter()
+                        .error(android.R.drawable.stat_notify_error)
+                        .into(this)
+                }
+                container.addView(mainView)
+                setupClickListener(this, child.clickType, child.clickIdType)
+                container
+//                AppCompatImageView(context).apply {
+//                    layoutParams = createLayoutParams(child.width, child.height, child.x, child.y)
+//                    scaleType = ImageView.ScaleType.FIT_XY//目前用户设置多大就多大。
+//                    ImageLoader().loadImage(this, imageUrl)
+//                    // 为我们自己创建的视图设置点击监听
+//                    setupClickListener(this, child.clickType, child.clickIdType)
+//                }
             }
         }
 
