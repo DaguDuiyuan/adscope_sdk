@@ -563,10 +563,10 @@ class AMPSBuilder {
   }
 
   /// 设置是否使用开屏广告标语
-  AMPSBuilder setIsUseSplashPunchLine(bool isUseSplashPunchLine) {
-    this.isUseSplashPunchLine = isUseSplashPunchLine;
-    return this;
-  }
+  // AMPSBuilder setIsUseSplashPunchLine(bool isUseSplashPunchLine) {
+  //   this.isUseSplashPunchLine = isUseSplashPunchLine;
+  //   return this;
+  // }
 
   /// 构建AMPSInitConfig对象的方法
   AMPSInitConfig build() {

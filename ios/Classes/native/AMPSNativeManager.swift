@@ -96,6 +96,7 @@ class AMPSNativeManager: NSObject {
         if configAM.adSize.width == 0 {
             configAM.adSize.width = UIScreen.main.bounds.width
         }
+        configAM.viewController = UIViewController.current()
         nativeAd = AMPSNativeExpressManager(spaceId: configAM.spaceId, adConfiguration: configAM)
         result(true)
     }
@@ -136,6 +137,7 @@ extension AMPSNativeManager: AMPSNativeExpressManagerDelegate{
         self.adIdMap.removeAll()
         let ids: [String]? =  nativeAd.viewsArray.map({ view in
             let id = UUID().uuidString
+            view.viewController = UIViewController.current()
             self.adIdMap[view] = id
             return id
         })

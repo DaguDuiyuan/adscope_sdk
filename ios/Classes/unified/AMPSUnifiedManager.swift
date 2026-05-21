@@ -90,6 +90,7 @@ class AmpsIosUnifiedNativeManager: NSObject,AMPSUnifiedNativeManagerDelegate {
         }
         let config = AdOptionModule.getAdConfig(para: param)
         config.adCount = 1
+        config.viewController = UIViewController.current()
         unifiedNative = AMPSUnifiedNativeManager(spaceId: config.spaceId, adConfiguration: config)
         result(true)
     }
