@@ -3,6 +3,7 @@ package xyz.adscope.adscope_sdk.view
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import androidx.core.graphics.toColorInt
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -315,11 +316,17 @@ class AmpsUnifiedFrameLayout(context: Context) : FrameLayout(context) {
             this.text = text
             layoutParams = createLayoutParams(child.width, null, child.x, child.y)
             child.fontSize?.let { textSize = it.toFloat() }
+            var shouldApplyShadow = true
             child.color?.let {
                 try {
-                    setTextColor(it.toColorInt())
+                    val textColor = it.toColorInt()
+                    setTextColor(textColor)
+                    shouldApplyShadow = Color.alpha(textColor) > 0
                 } catch (_: Exception) {
                 }
+            }
+            if (shouldApplyShadow) {
+                applyReadableTextShadow()
             }
             fontTextEllipsize(child.maxLines,child.ellipsize)
             setupClickListener(this, child.clickType, child.clickIdType)
@@ -332,11 +339,17 @@ class AmpsUnifiedFrameLayout(context: Context) : FrameLayout(context) {
             this.text = text
             layoutParams = createLayoutParams(child.width, null, child.x, child.y)
             child.fontSize?.let { textSize = it.toFloat() }
+            var shouldApplyShadow = true
             child.color?.let {
                 try {
-                    setTextColor(it.toColorInt())
+                    val textColor = it.toColorInt()
+                    setTextColor(textColor)
+                    shouldApplyShadow = Color.alpha(textColor) > 0
                 } catch (_: Exception) {
                 }
+            }
+            if (shouldApplyShadow) {
+                applyReadableTextShadow()
             }
             fontTextEllipsize(child.maxLines,child.ellipsize)
             setupClickListener(this, child.clickType, child.clickIdType)
@@ -549,4 +562,8 @@ private fun AppCompatTextView.fontTextEllipsize(mMaxLines: Int?,mEllipsize: Int?
             }
         }
     }
+}
+
+private fun AppCompatTextView.applyReadableTextShadow() {
+    setShadowLayer(3f, 0f, 1f, 0x99000000.toInt())
 }

@@ -222,8 +222,15 @@ class AMPSSelfRenderView: NSObject, FlutterPlatformView {
             if let fontSize = imgModel.fontSize {
                 titleLabel.font = UIFont.systemFont(ofSize: fontSize)
             }
+            var shouldApplyShadow = true
             if let color = imgModel.color {
-                titleLabel.textColor = UIColor(hexString: color)
+                if let textColor = UIColor(hexString: color) {
+                    titleLabel.textColor = textColor
+                    shouldApplyShadow = !textColor.isTransparent
+                }
+            }
+            if shouldApplyShadow {
+                applyReadableTextShadow(titleLabel)
             }
             adView.addSubview(titleLabel)
         }
@@ -251,8 +258,15 @@ class AMPSSelfRenderView: NSObject, FlutterPlatformView {
             if let fontSize = imgModel.fontSize {
                 descLabel.font = UIFont.systemFont(ofSize: fontSize)
             }
+            var shouldApplyShadow = true
             if let color = imgModel.color {
-                descLabel.textColor = UIColor(hexString: color)
+                if let textColor = UIColor(hexString: color) {
+                    descLabel.textColor = textColor
+                    shouldApplyShadow = !textColor.isTransparent
+                }
+            }
+            if shouldApplyShadow {
+                applyReadableTextShadow(descLabel)
             }
             adView.addSubview(descLabel)
         }
@@ -260,5 +274,18 @@ class AMPSSelfRenderView: NSObject, FlutterPlatformView {
         clickViews.append(contentsOf: [iconImageView, titleLabel, descLabel])
         // 注册可点击视图
         adView.registerClickableViews(clickViews)
+    }
+    
+    private func applyReadableTextShadow(_ label: UILabel) {
+        label.shadowColor = UIColor.black.withAlphaComponent(0.6)
+        label.shadowOffset = CGSize(width: 0, height: 1)
+    }
+}
+
+private extension UIColor {
+    var isTransparent: Bool {
+        var alpha: CGFloat = 0
+        getRed(nil, green: nil, blue: nil, alpha: &alpha)
+        return alpha <= 0.01
     }
 }
