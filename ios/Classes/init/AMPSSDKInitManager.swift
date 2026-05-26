@@ -8,6 +8,7 @@
 import Foundation
 import Flutter
 import AMPSAdSDK
+import BeiZiSDK
 
 
 class AMPSSDKInitManager {
@@ -67,6 +68,8 @@ class AMPSSDKInitManager {
             config.customExtraDict = extensionParam
         }
 
+        BeiZiSDKManager.setExtraUserData(["isLocation": "0"])
+
         AMPSAdSDKManager.sharedInstance().startAsync(withAppId: appid) { status in
     
             if status == AMPSAdSDKInitStatus.success {
@@ -86,5 +89,4 @@ class AMPSSDKInitManager {
         AMPSEventManager.shared.sendToFlutter(method)
     }
 }
-
 

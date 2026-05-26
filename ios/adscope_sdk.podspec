@@ -16,6 +16,7 @@ A new Flutter plugin project.
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
   s.dependency  'AMPSAdSDK'
+  s.dependency  'BeiZiSDK-iOS', '>= 5.1.0.0', '< 5.5.0.0'
 
   s.platform = :ios, '11.0'
 
